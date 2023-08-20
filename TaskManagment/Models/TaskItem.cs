@@ -12,6 +12,7 @@ namespace TaskManagment.Models
         [Column(TypeName = "nvarchar(250)")]
         public string Title { get; set; }
 
+        [Column(TypeName = "nvarchar(1000)")]
         public string? Description { get; set; }
 
         [Required]
@@ -20,6 +21,12 @@ namespace TaskManagment.Models
         public DateTime DueDate { get; set; }
 
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
+
+        [ForeignKey("User")]
+        public int Created_By { get; set; }
+
+        [ForeignKey("User")]
+        public int AssignedTo { get; set; }
     }
 
     public enum TaskStatus
