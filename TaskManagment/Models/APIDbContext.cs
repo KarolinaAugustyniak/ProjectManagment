@@ -9,5 +9,12 @@ namespace TaskManagment.Models
         }
 
         public DbSet<TaskItem> TaskItems { get; set; }
+      
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Organization> Organizations { get; set; }
+
+        public DbSet<Project> Projects { get; set; }
+
     }
 }

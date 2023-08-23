@@ -9,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddMvc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,17 +17,17 @@ builder.Services
     .AddJwtBearer(options =>
     {
         var jwtConfig = builder.Configuration.GetSection("Jwt"); // Load JWT configuration
-        options.TokenValidationParameters = new TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ClockSkew = TimeSpan.Zero,
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtConfig["Jwt:Issuer"],
-            ValidAudience = jwtConfig["Jwt:Audience"],
+            ValidIssuer = jwtConfig["Issuer"],
+            ValidAudience = jwtConfig["Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtConfig["Jwt:Key"])
+                Encoding.UTF8.GetBytes(jwtConfig["Key"])
             ),
         };
     });
