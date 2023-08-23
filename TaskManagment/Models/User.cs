@@ -23,7 +23,16 @@ namespace TaskManagment.Models
         public string PasswordHash { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
-        public string Position { get; set; } 
+        public string Position { get; set; }
+
+        public User(string username, string email, string passwordHash, string position)
+        {
+            Username = username;
+            Email = email;
+            PasswordHash = passwordHash;
+            Position = position;
+        }
 
     }
+
 }

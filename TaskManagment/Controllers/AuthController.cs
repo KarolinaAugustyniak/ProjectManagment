@@ -11,6 +11,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using BCrypt.Net;
+
 
 namespace TaskManagment.Controllers
 {
@@ -28,7 +31,7 @@ namespace TaskManagment.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] UserLogin userLogin)
         {
             var user = Authenticate(userLogin);
@@ -42,6 +45,40 @@ namespace TaskManagment.Controllers
             return NotFound("User not found");
         }
 
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegister userRegister)
+        {
+            // Check if the username or email is already taken
+            if (await IsUsernameTaken(userRegister.Username))
+            {
+                return BadRequest("Username is already taken.");
+            }
+
+            if (await IsEmailTaken(userRegister.Email))
+            {
+                return BadRequest("Email is already taken.");
+            }
+
+            // Hash the password using BCrypt
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(userRegister.PasswordHash);
+
+            var newUser = new User(userRegister.Username, userRegister.Email, passwordHash, userRegister.Position);
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok("Registration successful.");
+        }
+
+        private async Task<bool> IsUsernameTaken(string username)
+        {
+            return await _context.Users.AnyAsync(u => u.Username.ToLower() == username.ToLower());
+        }
+
+        private async Task<bool> IsEmailTaken(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email.ToLower() == email.ToLower());
+        }
 
         private string Generate(User user)
         {
@@ -65,11 +102,15 @@ namespace TaskManagment.Controllers
 
         private User Authenticate(UserLogin userLogin)
         {
-            var currentUser = _context.Users.FirstOrDefault(o => o.Username.ToLower() ==
-            userLogin.Username.ToLower() && o.PasswordHash == userLogin.PasswordHash);
+            var currentUser = _context.Users.FirstOrDefault(o => o.Username.ToLower() == userLogin.Username.ToLower());
 
-           return currentUser;
-           
+            if (currentUser != null && BCrypt.Net.BCrypt.Verify(userLogin.PasswordHash, currentUser.PasswordHash))
+            {
+                return currentUser;
+            }
+
+            return null;
+
         }
 
  
