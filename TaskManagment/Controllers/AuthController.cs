@@ -1,19 +1,11 @@
 ﻿using TaskManagment.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using BCrypt.Net;
-
 
 namespace TaskManagment.Controllers
 {
@@ -67,7 +59,8 @@ namespace TaskManagment.Controllers
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return Ok("Registration successful.");
+            var token = Generate(newUser);
+            return Ok(token);
         }
 
         private async Task<bool> IsUsernameTaken(string username)
@@ -87,14 +80,15 @@ namespace TaskManagment.Controllers
 
             var claims = new[]
             {
-               new Claim(ClaimTypes.NameIdentifier, user.Username),
-               new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Audience"],
               claims,
-              expires: DateTime.Now.AddMinutes(15),
+              expires: DateTime.Now.AddMinutes(480),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
