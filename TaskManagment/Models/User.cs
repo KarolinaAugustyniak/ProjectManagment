@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace TaskManagment.Models
 {
     public class User
@@ -24,6 +23,9 @@ namespace TaskManagment.Models
 
         [Column(TypeName = "nvarchar(100)")]
         public string Position { get; set; }
+
+        [ForeignKey("Organization")]
+        public int OrganizationId { get; set; }
 
         public User(string username, string email, string passwordHash, string position)
         {

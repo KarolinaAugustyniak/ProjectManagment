@@ -16,5 +16,7 @@ namespace TaskManagment.Models
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Invitation> Invitations { get; set; }
+
     }
 }
