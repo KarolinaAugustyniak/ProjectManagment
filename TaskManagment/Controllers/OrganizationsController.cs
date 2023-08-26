@@ -46,9 +46,13 @@ namespace TaskManagment.Controllers
 
                 _context.Organizations.Add(newOrganization);
                 _context.SaveChanges();
+
+                loggedInUser.OrganizationId = newOrganization.OrganizationId;
+                _context.SaveChanges();
+
                 return Ok();
             }
-            return BadRequest();
+            return NotFound("Logged-in user not found.");
 
         }
 
