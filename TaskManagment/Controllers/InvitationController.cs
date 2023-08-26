@@ -20,22 +20,7 @@ namespace TaskManagment.Controllers
         [HttpPost("generate")]
         public IActionResult GenerateInvitationCode(int expirationDays)
         {
-            // get organization ID
-            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var user = _context.Users.FirstOrDefault(u => u.UserId == int.Parse(loggedInUserId));
-
-            if (user == null)
-            {
-                return NotFound("User not found.");
-            }
-
-            int organizationId = user.OrganizationId;
-
-            if (!_context.Organizations.Any(o => o.OrganizationId == organizationId))
-            {
-                return NotFound("Organization not found.");
-            }
+            int organizationId = GetOrganizationIdForLoggedInUser();
 
             // Generate a new invitation code
             string invitationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8);
@@ -54,7 +39,52 @@ namespace TaskManagment.Controllers
             return Ok(invitation);
         }
 
+        [HttpGet("invitations")]
+        public IActionResult GetInvitationCodesForOrganization()
+        {
+            int organizationId = GetOrganizationIdForLoggedInUser();
 
+            var invitationCodes = _context.Invitations
+                .Where(invitation => invitation.OrganizationId == organizationId)
+                .ToList();
+
+            return Ok(invitationCodes);
+        }
+
+        [HttpDelete("delete/{invitationCode}")]
+        public IActionResult DeleteInvitationCode(string invitationCode)
+        {
+            int organizationId = GetOrganizationIdForLoggedInUser();
+
+            var invitation = _context.Invitations
+                .FirstOrDefault(invitation => invitation.OrganizationId == organizationId && invitation.InvitationCode == invitationCode);
+
+            if (invitation == null)
+            {
+                return NotFound("Invitation code not found.");
+            }
+
+            _context.Invitations.Remove(invitation);
+            _context.SaveChanges();
+
+            return Ok("Invitation code deleted.");
+        }
+
+      
+        private int GetOrganizationIdForLoggedInUser()
+        {
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == int.Parse(loggedInUserId));
+
+            if (user == null)
+            {
+                throw new InvalidOperationException("User not found.");
+            }
+
+            int organizationId = user.OrganizationId;
+            return organizationId;
+        }
 
     }
 }
