@@ -19,9 +19,11 @@ namespace TaskManagment.Models
         public int CreatedBy { get; set; }
 
         [ForeignKey("Organization")]
-        public int? OrganizationId { get; set; }
+        public int OrganizationId { get; set; }
 
         public virtual User User { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
+
     }
 }

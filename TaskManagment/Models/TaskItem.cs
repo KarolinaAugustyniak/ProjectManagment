@@ -22,11 +22,19 @@ namespace TaskManagment.Models
 
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
-        [ForeignKey("User")]
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
+
+        [ForeignKey("CreatedByUser")]
         public int Created_By { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("AssignedToUser")]
         public int AssignedTo { get; set; }
+
+        public virtual Project Project { get; set; }
+        public virtual User CreatedByUser { get; set; }
+        public virtual User AssignedToUser { get; set; }
+
     }
 
     public enum TaskStatus

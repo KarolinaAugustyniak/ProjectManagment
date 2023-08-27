@@ -16,5 +16,8 @@ namespace TaskManagment.Models
         public int CreatedBy { get; set; }
 
         public virtual User User { get; set; }
+
+        public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+
     }
 }
