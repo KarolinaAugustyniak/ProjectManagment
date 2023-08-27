@@ -17,7 +17,7 @@ namespace TaskManagment.Controllers
         }
 
         // generate a invitation code for an organization
-        [HttpPost("generate")]
+        [HttpPost("generate/{expirationDays}")]
         public IActionResult GenerateInvitationCode(int expirationDays)
         {
             int organizationId = GetOrganizationIdForLoggedInUser();
@@ -70,7 +70,36 @@ namespace TaskManagment.Controllers
             return Ok("Invitation code deleted.");
         }
 
-      
+        [HttpPut("join/{invitationCode}")]
+        public IActionResult JoinOrganization(string invitationCode)
+        {
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == int.Parse(loggedInUserId));
+
+            if (user == null)
+            {
+                throw new InvalidOperationException("User not found.");
+            }
+
+            var invitation = _context.Invitations.FirstOrDefault(i => i.InvitationCode == invitationCode);
+
+            if (invitation == null)
+            {
+               return NotFound("Invitation not found.");
+            }
+
+            if (invitation.Expire < DateTime.UtcNow)
+            {
+                return BadRequest("Invitation has expired.");
+            }
+
+            user.OrganizationId = invitation.OrganizationId;
+            _context.SaveChanges();
+
+            return Ok("User joined organization successfully.");
+        }
+
         private int GetOrganizationIdForLoggedInUser()
         {
             var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
