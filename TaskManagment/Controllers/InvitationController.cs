@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TaskManagment.Models;
+using TaskManagment.Services;
 
 namespace TaskManagment.Controllers
 {
@@ -10,17 +11,20 @@ namespace TaskManagment.Controllers
     public class InvitationController : ControllerBase
     {
         private readonly APIDbContext _context;
+        private readonly UserService _userService;
 
-        public InvitationController(APIDbContext context)
+        public InvitationController(APIDbContext context, UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // generate a invitation code for an organization
         [HttpPost("generate/{expirationDays}")]
         public IActionResult GenerateInvitationCode(int expirationDays)
         {
-            int organizationId = GetOrganizationIdForLoggedInUser();
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int organizationId = _userService.GetOrganizationIdForLoggedInUser(loggedInUserId);
 
             // Generate a new invitation code
             string invitationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8);
@@ -42,7 +46,8 @@ namespace TaskManagment.Controllers
         [HttpGet("invitations")]
         public IActionResult GetInvitationCodesForOrganization()
         {
-            int organizationId = GetOrganizationIdForLoggedInUser();
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int organizationId = _userService.GetOrganizationIdForLoggedInUser(loggedInUserId);
 
             var invitationCodes = _context.Invitations
                 .Where(invitation => invitation.OrganizationId == organizationId)
@@ -54,7 +59,8 @@ namespace TaskManagment.Controllers
         [HttpDelete("delete/{invitationCode}")]
         public IActionResult DeleteInvitationCode(string invitationCode)
         {
-            int organizationId = GetOrganizationIdForLoggedInUser();
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int organizationId = _userService.GetOrganizationIdForLoggedInUser(loggedInUserId);
 
             var invitation = _context.Invitations
                 .FirstOrDefault(invitation => invitation.OrganizationId == organizationId && invitation.InvitationCode == invitationCode);
@@ -98,21 +104,6 @@ namespace TaskManagment.Controllers
             _context.SaveChanges();
 
             return Ok("User joined organization successfully.");
-        }
-
-        private int GetOrganizationIdForLoggedInUser()
-        {
-            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var user = _context.Users.FirstOrDefault(u => u.UserId == int.Parse(loggedInUserId));
-
-            if (user == null)
-            {
-                throw new InvalidOperationException("User not found.");
-            }
-
-            int organizationId = user.OrganizationId;
-            return organizationId;
         }
 
     }
