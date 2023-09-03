@@ -18,10 +18,11 @@ namespace TaskManagment.Models
         [Required]
         public TaskStatus Status { get; set; } = TaskStatus.ToDo;
 
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
 
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
+        [Required]
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
@@ -29,7 +30,7 @@ namespace TaskManagment.Models
         public int Created_By { get; set; }
 
         [ForeignKey("AssignedToUser")]
-        public int AssignedTo { get; set; }
+        public int? AssignedTo { get; set; }
 
         public virtual Project Project { get; set; }
         public virtual User CreatedByUser { get; set; }

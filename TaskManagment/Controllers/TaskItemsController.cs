@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagment.Models;
+using TaskManagment.Services;
 
 namespace TaskManagment.Controllers
 {
@@ -14,15 +16,17 @@ namespace TaskManagment.Controllers
     public class TaskItemsController : ControllerBase
     {
         private readonly APIDbContext _context;
+        private readonly UserService _userService;
 
-        public TaskItemsController(APIDbContext context)
+        public TaskItemsController(APIDbContext context, UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // GET: api/TaskItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItems()
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItemsByProject()
         {
           if (_context.TaskItems == null)
           {
@@ -80,22 +84,30 @@ namespace TaskManagment.Controllers
             return NoContent();
         }
 
-        // POST: api/TaskItems
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> PostTaskItem(TaskItem taskItem)
+        public async Task<ActionResult<TaskItem>> PostTaskItem(TaskItemDto taskItemDto)
         {
-          if (_context.TaskItems == null)
-          {
-              return Problem("Entity set 'APIDbContext.TaskItems'  is null.");
-          }
-            _context.TaskItems.Add(taskItem);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var loggedInUserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var newTaskItem = new TaskItem
+            {
+                Title = taskItemDto.Title,
+                ProjectId = taskItemDto.ProjectId,
+                Created_By = loggedInUserId,
+                Status = taskItemDto.Status,
+            };
+
+            _context.TaskItems.Add(newTaskItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTaskItem", new { id = taskItem.TaskId }, taskItem);
+            return CreatedAtAction("GetTaskItem", new { id = newTaskItem.TaskId }, newTaskItem);
         }
 
-        // DELETE: api/TaskItems/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTaskItem(int id)
         {

@@ -105,7 +105,7 @@ namespace TaskManagment.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskId"));
 
-                    b.Property<int>("AssignedTo")
+                    b.Property<int?>("AssignedTo")
                         .HasColumnType("int");
 
                     b.Property<int>("Created_By")
@@ -117,7 +117,7 @@ namespace TaskManagment.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<DateTime>("DueDate")
+                    b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProjectId")
@@ -206,9 +206,7 @@ namespace TaskManagment.Migrations
                 {
                     b.HasOne("TaskManagment.Models.User", "AssignedToUser")
                         .WithMany()
-                        .HasForeignKey("AssignedTo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssignedTo");
 
                     b.HasOne("TaskManagment.Models.User", "CreatedByUser")
                         .WithMany()
