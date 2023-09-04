@@ -24,19 +24,77 @@ namespace TaskManagment.Controllers
             _userService = userService;
         }
 
-        // GET: api/TaskItems
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItemsByProject()
+        [HttpGet("getForProject/{projectId}")]
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItemsByProject(int projectId)
         {
-          if (_context.TaskItems == null)
+          var taskItems = await _context.TaskItems
+              .Where(x => x.ProjectId == projectId)
+              .ToListAsync();
+
+          if (taskItems == null)
           {
               return NotFound();
           }
-            return await _context.TaskItems.ToListAsync();
+
+          return Ok(taskItems);
         }
 
-        // GET: api/TaskItems/5
-        [HttpGet("{id}")]
+        [HttpGet("getForUser/{userId}")]
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTaskItemsForUser(int userId)
+        {
+            var taskItems = await _context.TaskItems
+                .Where(x => x.AssignedTo == userId)
+                .ToListAsync();
+
+            if (taskItems == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(taskItems);
+        }
+
+        [HttpGet("upcoming")]
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetUpcomingTaskItemsForUser()
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            DateTime currentDate = DateTime.UtcNow;
+
+            var upcomingTaskItems = await _context.TaskItems
+                .Where(t => t.AssignedTo == userId && t.DueDate.HasValue && t.DueDate > currentDate)
+                .OrderBy(t => t.DueDate)
+                .ToListAsync();
+
+            if (upcomingTaskItems == null)
+            {
+                return NotFound();
+            }
+
+            return upcomingTaskItems;
+        }
+
+        [HttpGet("outdated")]
+        public async Task<ActionResult<IEnumerable<TaskItem>>> GetOutdatedTaskItemsForUser()
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            DateTime currentDate = DateTime.UtcNow;
+
+            var outdatedTaskItems = await _context.TaskItems
+                .Where(t => t.AssignedTo == userId && t.DueDate.HasValue && t.DueDate < currentDate)
+                .OrderBy(t => t.DueDate)
+                .ToListAsync();
+
+            if (outdatedTaskItems == null)
+            {
+                return NotFound();
+            }
+
+            return outdatedTaskItems;
+        }
+
+        [HttpGet("getTask/{id}")]
         public async Task<ActionResult<TaskItem>> GetTaskItem(int id)
         {
           if (_context.TaskItems == null)
@@ -53,33 +111,23 @@ namespace TaskManagment.Controllers
             return taskItem;
         }
 
-        // PUT: api/TaskItems/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTaskItem(int id, TaskItem taskItem)
+        public async Task<IActionResult> PutTaskItem(int id, TaskItem updatedTaskItem)
         {
-            if (id != taskItem.TaskId)
+            var existingTaskItem = await _context.TaskItems.FindAsync(id);
+
+            if (existingTaskItem == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(taskItem).State = EntityState.Modified;
+            existingTaskItem.Title = updatedTaskItem.Title;
+            existingTaskItem.Description = updatedTaskItem.Description;
+            existingTaskItem.Status = updatedTaskItem.Status;
+            existingTaskItem.DueDate = updatedTaskItem.DueDate;
+            existingTaskItem.AssignedTo = updatedTaskItem.AssignedTo;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TaskItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -125,11 +173,6 @@ namespace TaskManagment.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool TaskItemExists(int id)
-        {
-            return (_context.TaskItems?.Any(e => e.TaskId == id)).GetValueOrDefault();
         }
     }
 }
