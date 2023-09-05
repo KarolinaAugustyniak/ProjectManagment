@@ -19,6 +19,8 @@ namespace TaskManagment.Models
 
         public DbSet<Invitation> Invitations { get; set; }
 
+        public DbSet<TaskComment> TaskComments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TaskItem>()
@@ -31,6 +33,11 @@ namespace TaskManagment.Models
                  .HasMany(o => o.Projects)
                  .WithOne(p => p.Organization)
                  .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TaskComment>()
+              .HasOne(tc => tc.TaskItem)  
+              .WithMany(ti => ti.TaskComments) 
+              .HasForeignKey(tc => tc.TaskId);
         }
     }
 }

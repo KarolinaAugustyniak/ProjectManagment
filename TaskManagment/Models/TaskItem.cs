@@ -35,6 +35,7 @@ namespace TaskManagment.Models
         public virtual Project Project { get; set; }
         public virtual User CreatedByUser { get; set; }
         public virtual User AssignedToUser { get; set; }
+        public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
 
     }
 
