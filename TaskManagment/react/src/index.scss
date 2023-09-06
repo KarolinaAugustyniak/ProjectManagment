@@ -1,0 +1,157 @@
+$black: #373737;
+$background: #F1F4FF;
+$borderColor: #D2DDFF;
+$white: #fff;
+$primary: #4294FF;
+$gray: #00000066;
+
+$borderRadius: 5px;
+
+:root {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 0.84px;
+    color: $black;
+}
+
+.btn {
+    font-weight: 500;
+    font-size: 18px;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $borderRadius;
+    outline: none;
+    border: none;
+
+    &--main {
+        font-weight: 500;
+        color: $white;
+        background-color: $primary;
+    }
+}
+
+.input-border {
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    position: relative;
+    max-width: 333px;
+    width: 100%;
+    min-height: 42px;
+    margin-bottom: 34px;
+    margin-top: 34px;
+
+    &__wrapper {
+        display: flex;
+        gap: 14px;
+        position: absolute;
+        left: 14px;
+        top: 10px;
+        pointer-events: none;
+    }
+
+    &__label {
+        color: $gray;
+        font-weight: 500;
+        letter-spacing: 0.64px;
+        text-transform: uppercase;
+    }
+
+    &__input {
+        padding-left: 44px;
+        border: none;
+        width: 100%;
+        height: 100%;
+        min-height: 42px;
+        border-radius: $borderRadius;
+    }
+}
+
+.login {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+
+    &__left {
+        background-color: $background;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    &__right {
+        width: 50%;
+        object-fit: contain;
+    }
+
+    &__box {
+        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: $borderRadius;
+        border: 1px solid $borderColor;
+        max-width: 516px;
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    &__logo {
+        margin-top: 45px;
+        margin-bottom: 66px;
+    }
+
+    &__text {
+        margin-bottom: 70px;
+        margin-top: 100px;
+    }
+
+    &__link {
+        font-weight: 500;
+        text-decoration: underline;
+        color: $black;
+    }
+
+    &__btn {
+        margin-top: 42px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__title {
+        margin-top: 68px;
+        margin-bottom: 26px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .login {
+        &__left {
+            width: 100%;
+        }
+
+        &__right {
+            display: none;
+        }
+    }
+}
