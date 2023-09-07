@@ -43,10 +43,15 @@ a {
     outline: none;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
 
     &--main {
         color: $white;
         background-color: $primary;
+
+        &:hover {
+            background-color: #176cdb;
+        }
     }
 }
 
@@ -57,8 +62,8 @@ a {
     max-width: 333px;
     width: 100%;
     min-height: 42px;
-    margin-bottom: 34px;
-    margin-top: 34px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 
     &__wrapper {
         display: flex;
@@ -89,19 +94,6 @@ a {
             outline: 1px solid $primary;
         }
     }
-}
-
-//if input is focused then label should be above input
-.input-border__input:focus+.input-border__wrapper label {
-    transform: translate(-40px, -30px);
-    font-size: 12px;
-    color: $primary;
-}
-
-//if input have content then label should be above input
-.input-border__input:not(:placeholder-shown)+.input-border__wrapper label {
-    transform: translate(-40px, -30px);
-    font-size: 12px;
 }
 
 .login {
@@ -141,8 +133,8 @@ a {
     }
 
     &__text {
-        margin-bottom: 70px;
-        margin-top: 100px;
+        margin-bottom: 60px;
+        margin-top: 65px;
         text-align: center;
     }
 
@@ -159,8 +151,8 @@ a {
     }
 
     &__title {
-        margin-top: 68px;
-        margin-bottom: 26px;
+        margin-top: 48px;
+        margin-bottom: 20px;
     }
 
     &__error {
@@ -191,4 +183,17 @@ a {
             display: none;
         }
     }
+}
+
+//if input is focused then label should be above input
+.input-border__input:focus+.input-border__wrapper label {
+    transform: translate(-40px, -30px);
+    font-size: 12px;
+    color: $primary;
+}
+
+//if input have content then label should be above input
+.input-border__input:not(:placeholder-shown)+.input-border__wrapper label {
+    transform: translate(-40px, -30px);
+    font-size: 12px;
 }
