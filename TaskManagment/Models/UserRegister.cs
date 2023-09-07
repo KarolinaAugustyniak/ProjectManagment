@@ -14,7 +14,7 @@ namespace TaskManagment.Models
 
         [Required]
         [StringLength(100)]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [StringLength(100)]

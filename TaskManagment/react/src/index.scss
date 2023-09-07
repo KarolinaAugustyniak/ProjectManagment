@@ -4,6 +4,7 @@ $borderColor: #D2DDFF;
 $white: #fff;
 $primary: #4294FF;
 $gray: #00000066;
+$red: rgb(215, 36, 8);
 
 $borderRadius: 5px;
 
@@ -41,9 +42,9 @@ a {
     border-radius: $borderRadius;
     outline: none;
     border: none;
+    cursor: pointer;
 
     &--main {
-        font-weight: 500;
         color: $white;
         background-color: $primary;
     }
@@ -64,7 +65,7 @@ a {
         gap: 14px;
         position: absolute;
         left: 14px;
-        top: 10px;
+        top: 12px;
         pointer-events: none;
     }
 
@@ -73,6 +74,7 @@ a {
         font-weight: 500;
         letter-spacing: 0.64px;
         text-transform: uppercase;
+        transition: all 0.3s ease;
     }
 
     &__input {
@@ -82,7 +84,24 @@ a {
         height: 100%;
         min-height: 42px;
         border-radius: $borderRadius;
+
+        &:focus {
+            outline: 1px solid $primary;
+        }
     }
+}
+
+//if input is focused then label should be above input
+.input-border__input:focus+.input-border__wrapper label {
+    transform: translate(-40px, -30px);
+    font-size: 12px;
+    color: $primary;
+}
+
+//if input have content then label should be above input
+.input-border__input:not(:placeholder-shown)+.input-border__wrapper label {
+    transform: translate(-40px, -30px);
+    font-size: 12px;
 }
 
 .login {
@@ -124,6 +143,7 @@ a {
     &__text {
         margin-bottom: 70px;
         margin-top: 100px;
+        text-align: center;
     }
 
     &__link {
@@ -141,6 +161,23 @@ a {
     &__title {
         margin-top: 68px;
         margin-bottom: 26px;
+    }
+
+    &__error {
+        color: $red;
+        text-align: center;
+        font-weight: 500;
+        background-color: #ff060626;
+        padding: 14px;
+        border-radius: $borderRadius;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .login {
+        &__box {
+            max-width: 400px;
+        }
     }
 }
 

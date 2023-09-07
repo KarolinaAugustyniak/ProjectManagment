@@ -53,9 +53,9 @@ namespace TaskManagment.Controllers
             }
 
             // Hash the password using BCrypt
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(userRegister.PasswordHash);
+            string password = BCrypt.Net.BCrypt.HashPassword(userRegister.Password);
 
-            var newUser = new User(userRegister.Username, userRegister.Email, passwordHash, userRegister.Position);
+            var newUser = new User(userRegister.Username, userRegister.Email, password, userRegister.Position);
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
@@ -98,7 +98,7 @@ namespace TaskManagment.Controllers
         {
             var currentUser = _context.Users.FirstOrDefault(o => o.Username.ToLower() == userLogin.Username.ToLower());
 
-            if (currentUser != null && BCrypt.Net.BCrypt.Verify(userLogin.PasswordHash, currentUser.PasswordHash))
+            if (currentUser != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, currentUser.Password))
             {
                 return currentUser;
             }

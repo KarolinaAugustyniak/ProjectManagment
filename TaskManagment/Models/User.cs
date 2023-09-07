@@ -19,7 +19,9 @@ namespace TaskManagment.Models
 
         [Required]
         [Column(TypeName = "nvarchar(100)")]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
+
+        public string ProfileImageFileName { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         public string Position { get; set; }
@@ -27,11 +29,11 @@ namespace TaskManagment.Models
         [ForeignKey("Organization")]
         public int OrganizationId { get; set; }
 
-        public User(string username, string email, string passwordHash, string position)
+        public User(string username, string email, string password, string position)
         {
             Username = username;
             Email = email;
-            PasswordHash = passwordHash;
+            Password = password;
             Position = position;
         }
 
