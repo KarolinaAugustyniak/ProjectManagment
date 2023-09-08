@@ -23,7 +23,7 @@ namespace TaskManagment.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrganization(Organization organization)
+        public IActionResult CreateOrganization([FromBody] string organization)
         {
             // Get the currently logged-in user's ID
             if (int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int loggedInUserId))
@@ -39,7 +39,7 @@ namespace TaskManagment.Controllers
                 // Create the organization
                 Organization newOrganization = new Organization
                 {
-                    OrganizationName = organization.OrganizationName,
+                    OrganizationName = organization,
                     CreatedBy = loggedInUserId,
                     User = loggedInUser
                 };
