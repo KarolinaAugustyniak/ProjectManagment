@@ -20,7 +20,7 @@ export default function TaskCard({ task, index }: TaskCardProps) {
           {...provided.draggableProps}
           {...provided.dragHandleProps} 
         >
-          TaskCard {task.title}
+           {task.title} 
         </li>
       )}
     </Draggable>
