@@ -10,6 +10,7 @@ $borderRadius: 5px;
 
 :root {
     font-family: 'Ubuntu', sans-serif;
+    color: $black;
 }
 
 * {
@@ -55,6 +56,9 @@ a {
     }
 }
 
+p{
+    margin: 0;
+}
 
 .login {
     display: flex;
@@ -274,4 +278,145 @@ a {
             margin: 0;
         }
     }
+}
+
+.kanban{
+    display: flex;
+    gap: 20px;
+    &__column{
+        max-width: 350px;
+        width: 25%;
+        background-color: $background;
+        border: 1px solid $borderColor;
+        border-radius: $borderRadius;
+    }
+    &__title{
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 5px;
+    }
+    &__list{
+       padding: 8px;
+        margin: 0;
+        list-style-type: none;
+    }
+}
+
+.task-card{
+    margin-bottom: 8px;
+    background-color: $white;
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    padding: 16px 20px;
+    &__title{
+        font-size: 18px;
+        font-weight: 400;
+        letter-spacing: 0.72px;
+        margin-bottom: 14px;
+        margin-top: 0;
+    }
+    &__labels{
+        display: flex;
+        gap: 5px;
+        padding: 0;
+        list-style-type: none;
+    }
+    &__label{
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.56px;
+        text-transform: uppercase;
+        background: #D9365D;
+        color: $white;
+        border-radius: $borderRadius;
+        width: fit-content;
+        padding: 2px 12px;
+    }
+    &__bottom{
+        font-size: 14px;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 16px;
+    }
+}
+
+.due-to-date{
+    display: flex;
+    gap: 8px;
+}
+
+.layout{
+    display: flex;
+    gap: 30px;
+    min-height: 100vh;
+}
+
+.sidebar{
+    max-width: 315px;
+    width: 100%;
+    background-color: $background;
+    border: 1px solid $borderColor;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    &__container{
+        max-width: 200px;
+        width: 100%;
+    }
+    &__logo{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 4vw;
+        margin-bottom: 10vw;
+    }
+}
+
+.menu{
+    &__element{
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.72px;
+        display: flex;
+        gap: 12px;
+        margin-bottom: 14px;
+        align-items: center;
+        margin-top: 26px;
+    }
+    &__submenu{
+        max-height: 0px;
+        overflow: hidden;
+        transition: 0.5s ease-in-out;
+        list-style-type: none;
+        border-left: 3px solid $borderColor;
+        margin-left: 10px;
+        padding-left: 24px;
+        letter-spacing: 0.56px;
+        &--visible{
+            max-height: 400px;
+        }
+        li{
+            font-weight: 300;
+            &:not(&:last-child){
+                margin-bottom: 12px;
+            }
+        }
+    }
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.container{
+    max-width: 1390px;
+    width: 100%;
 }

@@ -30,7 +30,7 @@ const Kanban = ({ tasks, setTasks, status }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban-board">
+      <div className="kanban">
         {status.map((statusItem, index) => (
           <KanbanColumn
             title={statusItem}

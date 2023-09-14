@@ -7,6 +7,7 @@ import Position from "../assets/img/position.svg";
 import { Link } from "react-router-dom";
 import LoginLayout from "../layouts/LoginLayout";
 import InputWithLabel from "../components/InputWithLabel";
+import { useNavigate } from 'react-router-dom';
 
 interface UserRegister {
   username: string;
@@ -17,6 +18,7 @@ interface UserRegister {
 }
 
 export default function Register() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<UserRegister>({
     username: "",
@@ -44,6 +46,7 @@ export default function Register() {
       );
       const token = response.data;
       localStorage.setItem("token", token);
+      navigate('/welcome');
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Kanban from '../components/Kanban';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Layout from '../layouts/Layout';
 
 export default function Project() {
   const { projectId } = useParams();
@@ -16,9 +17,14 @@ export default function Project() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Reset tasks to an empty object before fetching new data
         const response = await axios.get(`https://localhost:7261/api/TaskItems/getForProject/${projectId}`);
-
-        const updatedTasks = {...tasks};
+        const updatedTasks = {
+          "To do": [],
+          "In Progress": [],
+          "Testing": [],
+          "Completed": [],
+        };
        
         // Assign tasks to the columns based on status
         response.data.forEach((task) => {
@@ -36,8 +42,10 @@ export default function Project() {
   const status = Object.keys(tasks);
 
   return (
-    <div>
+    <Layout>
+      <h1 className='main-title'>Title</h1>
+      
       <Kanban tasks={tasks} setTasks={setTasks} status={status} />
-    </div>
+    </Layout>
   );
 }
