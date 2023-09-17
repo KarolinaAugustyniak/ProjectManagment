@@ -24,10 +24,10 @@ export default function TaskCard({ task, index }: TaskCardProps) {
           {...provided.dragHandleProps} 
         >
           <h3 className='task-card__title'> {title} </h3>
-          <ul className='task-card__labels'>
+          {/* <ul className='task-card__labels'>
             <li className='task-card__label'>LABEL</li>
             <li className='task-card__label'>LABEL</li>
-          </ul>
+          </ul> */}
           <div className='task-card__bottom'>
             {assignedToUser ? <User username={assignedToUser.username} image={assignedToUser.profileImageFileName}/> :  <p className=''>Task not assigned</p> }
             <DueToDate date={dueDate} />

@@ -289,6 +289,9 @@ p{
         background-color: $background;
         border: 1px solid $borderColor;
         border-radius: $borderRadius;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
     }
     &__title{
         font-size: 20px;
@@ -302,7 +305,25 @@ p{
        padding: 8px;
         margin: 0;
         list-style-type: none;
+        flex-grow: 1;
     }
+}
+
+.add-task{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
 }
 
 .task-card{
@@ -378,6 +399,7 @@ p{
 }
 
 .menu{
+    padding-left: 0;
     &__element{
         cursor: pointer;
         font-size: 18px;
@@ -388,6 +410,19 @@ p{
         margin-bottom: 14px;
         align-items: center;
         margin-top: 26px;
+        position: relative;
+        &::after{
+            display: block;
+            content: url(assets/img/arrow.svg);
+            position: absolute;
+            right: 0;
+            transition: 0.2s ease-in-out;
+        }
+        &--open{
+            &::after{
+                transform: rotate(180deg);
+            }
+        }
     }
     &__submenu{
         max-height: 0px;
@@ -419,4 +454,5 @@ p{
 .container{
     max-width: 1390px;
     width: 100%;
+    padding: 0 20px;
 }

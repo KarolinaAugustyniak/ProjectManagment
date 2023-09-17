@@ -35,8 +35,10 @@ const Kanban = ({ tasks, setTasks, status }) => {
           <KanbanColumn
             title={statusItem}
             key={index}
+            index={index.toString()}
             id={statusItem}
             tasks={tasks[statusItem]}
+            setTasks={setTasks}
           />
         ))}
       </div>

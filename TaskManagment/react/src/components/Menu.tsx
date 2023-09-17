@@ -22,13 +22,13 @@ export default function Menu() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://localhost:7261/api/Projects/get', {
+              const response = await axios.get('https://localhost:7261/api/Projects/get', {
                   headers: {
                     'Authorization': `Bearer ${token}` 
                   }
                 });
                 setProjects(response.data);
-              }  catch (error) {
+            }  catch (error) {
             console.error('Error fetching data:', error);
           }
         };
@@ -38,7 +38,8 @@ export default function Menu() {
 
   return (
     <ul className='menu'>
-        <li className='menu__element' onClick={toggleProjectsSubMenu}><img src={Projects}/> Projects</li>
+        <li className={`menu__element ${ isProjectsSubMenuOpen ? "menu__element--open" : ""}`} 
+          onClick={toggleProjectsSubMenu}><img src={Projects}/> Projects</li>
         <ul className={`menu__submenu ${ isProjectsSubMenuOpen ? "menu__submenu--visible" : ""}`}>
            {projects?
             projects.map(project => <li key={project.projectId}> <Link to={`/project/${project.projectId}`}>{project.projectName}</Link> </li>)
@@ -46,8 +47,9 @@ export default function Menu() {
             <li>No projects found</li>
             }
         </ul>
-        <li className='menu__element'><img src={Tasks}/> My tasks</li>
-        <ul className='menu__submenu'>
+        <li className={`menu__element ${ isMyTasksSubMenuOpen ? "menu__element--open" : ""}`} 
+          onClick={toggleMyTasksSubMenu}><img src={Tasks}/> My tasks</li>
+        <ul className={`menu__submenu ${ isMyTasksSubMenuOpen ? "menu__submenu--visible" : ""}`}>
             <li>test</li>
             <li>test</li>
         </ul>
