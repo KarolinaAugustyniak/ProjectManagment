@@ -34,6 +34,8 @@ namespace TaskManagment.Controllers
               
             };
 
+            newTaskComment.CommentedByUser = await _context.Users.FindAsync(loggedInUserId);
+
             _context.TaskComments.Add(newTaskComment);
             await _context.SaveChangesAsync();
 
