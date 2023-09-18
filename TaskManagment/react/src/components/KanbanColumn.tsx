@@ -69,7 +69,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, index, id, tasks, se
       newTaskInputRef.current.focus();
     }
   }, [addNewTask]);
-  console.log(tasks);
+
   return (
     <div className='kanban__column'>
       <h2 className='kanban__title'>{title}</h2>
@@ -84,7 +84,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, index, id, tasks, se
                 ))}
                 {addNewTask && 
                 <li className='task-card' ref={newTaskItem}>
-                  <input type="text" placeholder='Add task title' ref={newTaskInputRef} onChange={handleInputChange} />
+                  <input type="text" placeholder='Add task title' className='task-card__input' ref={newTaskInputRef} onChange={handleInputChange} />
                 </li> }
                 {provided.placeholder}
             </ul>

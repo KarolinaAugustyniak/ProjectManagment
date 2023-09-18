@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import User from './User';
 import DueToDate from './DueToDate';
+import TaskCardDetails from './TaskCardDetails';
 
 interface Task {
   id: number;
@@ -15,13 +16,26 @@ interface TaskCardProps {
 
 export default function TaskCard({ task, index }: TaskCardProps) {
   const {taskId, title, assignedToUser, dueDate } = task;
+  
+  const [areDetailsOpen, setAreDetailsOpen] = useState(false);
+
+  const openDetails = () => {
+    setAreDetailsOpen(true);
+  };
+
+  const closeDetails = () => {
+    setAreDetailsOpen(false);
+  };
+
   return (
+    <li>
     <Draggable draggableId={taskId.toString()} index={index}>
       {(provided) => (
-        <li className='task-card'
+        <div className='task-card'
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps} 
+          onClick={openDetails}
         >
           <h3 className='task-card__title'> {title} </h3>
           {/* <ul className='task-card__labels'>
@@ -32,8 +46,12 @@ export default function TaskCard({ task, index }: TaskCardProps) {
             {assignedToUser ? <User username={assignedToUser.username} image={assignedToUser.profileImageFileName}/> :  <p className=''>Task not assigned</p> }
             <DueToDate date={dueDate} />
           </div>
-        </li>
+        </div>
       )}
     </Draggable>
+    {areDetailsOpen && (
+      <TaskCardDetails task={task} onClose={closeDetails} />
+    )}
+    </li>
   );
 }

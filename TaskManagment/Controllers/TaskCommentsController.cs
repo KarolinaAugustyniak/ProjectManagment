@@ -45,12 +45,8 @@ namespace TaskManagment.Controllers
         {
             var taskComments = await _context.TaskComments
                 .Where(tc => tc.TaskId == taskId)
+                .Include(u => u.CommentedByUser)
                 .ToListAsync();
-
-            if (taskComments == null || taskComments.Count == 0)
-            {
-                return NotFound("No comments found for the specified task.");
-            }
 
             return Ok(taskComments);
         }
