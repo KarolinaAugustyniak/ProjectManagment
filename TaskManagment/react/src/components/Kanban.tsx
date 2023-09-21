@@ -3,11 +3,13 @@ import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import KanbanColumn from "./KanbanColumn";
 import { useTaskContext } from "../context/TaskContext";
+import axios from "axios";
 
 const Kanban = ({ status }) => {
   const { tasks, setTasks } = useTaskContext();
+  const token = localStorage.getItem("token");
 
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     const { destination, source } = result;
 
     if (!destination) {
@@ -29,6 +31,22 @@ const Kanban = ({ status }) => {
     destinationColumn.splice(destination.index, 0, taskToMove);
 
     setTasks(updatedTasks);
+
+    const updatedTask = { ...taskToMove, status: destination.index };
+
+    try {
+      await axios.put(
+        `https://localhost:7261/api/TaskItems/${updatedTask.taskId}`,
+        updatedTask,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
