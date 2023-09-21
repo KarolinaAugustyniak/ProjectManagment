@@ -5,6 +5,7 @@ import Plus from "../assets/img/plus.svg";
 import axios from "axios";
 import useOutsideClick from "../hooks/useOutsideClick";
 import { useParams } from "react-router-dom";
+import { useTaskContext } from "../context/TaskContext";
 
 interface Task {
   id: number;
@@ -15,16 +16,14 @@ interface KanbanColumnProps {
   title: string;
   index: string;
   id: string;
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  tasksForColumn: Task[];
 }
 
 const KanbanColumn: React.FC<KanbanColumnProps> = ({
   title,
   index,
   id,
-  tasks,
-  setTasks,
+  tasksForColumn,
 }) => {
   const { projectId } = useParams();
   const [newTask, setNewTask] = useState({
@@ -36,6 +35,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
   const newTaskItem = useRef(null);
   const newTaskInputRef = useRef<HTMLInputElement>(null);
   const token = localStorage.getItem("token");
+  const { tasks, setTasks } = useTaskContext();
 
   const handleClick = () => {
     setAddNewTask(true);
@@ -87,7 +87,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
             {...provided.droppableProps}
             className="kanban__list"
           >
-            {(tasks as Task[]).map((task, index) => (
+            {(tasksForColumn as Task[]).map((task, index) => (
               <TaskCard key={task.taskId} task={task} index={index} />
             ))}
             {addNewTask && (

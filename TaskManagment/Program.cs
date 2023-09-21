@@ -33,7 +33,7 @@ builder.Services
         var jwtConfig = builder.Configuration.GetSection("Jwt"); // Load JWT configuration
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ClockSkew = TimeSpan.Zero,
+            ClockSkew = TimeSpan.FromMinutes(5),
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,

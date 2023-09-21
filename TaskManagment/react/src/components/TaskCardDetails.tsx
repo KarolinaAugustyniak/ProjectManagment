@@ -1,6 +1,8 @@
 import React from "react";
 import User from "./User";
 import TaskComments from "./TaskComments";
+import DeleteTask from "./DeleteTask";
+import CloseIcon from "../assets/img/close.svg";
 
 interface Task {
   id: number;
@@ -31,9 +33,10 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
         <div className="task-details__header">
           <h3 className="task-details__title">{title}</h3>
           <button className="task-details__close" onClick={onClose}>
-            Close
+            <img src={CloseIcon} alt="close" />
           </button>
         </div>
+
         <div className="task-details__content">
           <div className="task-details__created">
             Created by
@@ -59,6 +62,9 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
               </div>
             )}
           </div>
+
+          <DeleteTask taskId={taskId} />
+
           <TaskComments taskId={taskId} />
         </div>
       </div>

@@ -406,7 +406,7 @@ p {
 }
 
 .popup-overlay {
-  position: absolute;
+  position: fixed;
   background-color: #00000044;
   left: 0;
   top: 0;
@@ -417,7 +417,7 @@ p {
 
 .task-details {
   display: block;
-  position: absolute;
+  position: fixed;
   background-color: $white;
   left: 50%;
   top: 50%;
@@ -428,6 +428,8 @@ p {
   z-index: $taskDetails;
   max-width: 500px;
   width: 100%;
+  max-height: 100vh;
+  overflow: auto;
   &__header {
     display: flex;
     justify-content: space-between;
@@ -440,6 +442,7 @@ p {
     flex-wrap: wrap;
     font-size: 14px;
     margin-bottom: 35px;
+    align-items: center;
   }
   &__title {
     margin: 0;
@@ -449,6 +452,15 @@ p {
     gap: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
+    align-items: center;
+  }
+  &__close {
+    cursor: pointer;
+    background: $borderColor;
+    padding: 3px 7px;
+    border: none;
+    border-radius: $borderRadius;
+    transition: 0.5s;
   }
 }
 
@@ -596,6 +608,7 @@ p {
     font-weight: 500;
     font-family: $primaryFont;
     text-transform: uppercase;
+    cursor: pointer;
   }
 }
 
@@ -604,14 +617,14 @@ p {
   &__wrapper {
     display: flex;
     gap: 9px;
-    align-items: flex-end;
+    align-items: center;
   }
   &__date {
     color: $gray;
     font-size: 14px;
   }
   &__text {
-    margin: 10px 0;
+    margin: 5px 0 10px;
     font-size: 14px;
   }
 }
@@ -623,7 +636,19 @@ p {
   &__img {
     width: 22px;
     height: 22px;
-    border-radius: $borderRadius;
+    border-radius: 50%;
     object-fit: cover;
   }
+}
+
+.delete-task {
+  padding: 10px 18px;
+  border: none;
+  background-color: rgb(197 0 0);
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
 }

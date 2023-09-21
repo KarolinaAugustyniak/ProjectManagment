@@ -1,9 +1,12 @@
 // Kanban.tsx
-import React from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
-import KanbanColumn from './KanbanColumn';
+import React from "react";
+import { DragDropContext } from "react-beautiful-dnd";
+import KanbanColumn from "./KanbanColumn";
+import { useTaskContext } from "../context/TaskContext";
 
-const Kanban = ({ tasks, setTasks, status }) => {
+const Kanban = ({ status }) => {
+  const { tasks, setTasks } = useTaskContext();
+
   const onDragEnd = (result) => {
     const { destination, source } = result;
 
@@ -37,8 +40,7 @@ const Kanban = ({ tasks, setTasks, status }) => {
             key={index}
             index={index.toString()}
             id={statusItem}
-            tasks={tasks[statusItem]}
-            setTasks={setTasks}
+            tasksForColumn={tasks[statusItem]}
           />
         ))}
       </div>
