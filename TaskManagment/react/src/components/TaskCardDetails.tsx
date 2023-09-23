@@ -3,6 +3,7 @@ import User from "./User";
 import TaskComments from "./TaskComments";
 import DeleteTask from "./DeleteTask";
 import CloseIcon from "../assets/img/close.svg";
+import AssignTask from "./AssignTask";
 
 interface Task {
   id: number;
@@ -27,6 +28,7 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
   const creationDate = new Date(task.creationDate);
   const formattedCreationDate = creationDate.toLocaleDateString();
 
+  console.log(task);
   return (
     <>
       <div className="task-details">
@@ -40,31 +42,12 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
         <div className="task-details__content">
           <div className="task-details__created">
             Created by
-            <User
-              username={createdByUser.username}
-              image={createdByUser.profileImageFileName}
-            />
+            <User user={createdByUser} />
             on {formattedCreationDate}{" "}
           </div>
 
-          <div className="task-details__wrapper">
-            <p className="task-details__name">Assigned to</p>
-            {assignedToUser ? (
-              <div>
-                <User
-                  username={assignedToUser.username}
-                  image={assignedToUser.profileImageFileName}
-                />
-              </div>
-            ) : (
-              <div>
-                <p className="task-details__not-assigned">Task not assigned</p>
-              </div>
-            )}
-          </div>
-
+          <AssignTask assignedToUser={assignedToUser} task={task} />
           <DeleteTask taskId={taskId} />
-
           <TaskComments taskId={taskId} />
         </div>
       </div>

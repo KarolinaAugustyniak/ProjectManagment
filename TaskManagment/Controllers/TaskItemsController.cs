@@ -144,12 +144,14 @@ namespace TaskManagment.Controllers
             }
 
             var loggedInUserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var CreatedByUser = _context.Users.FirstOrDefault(u => u.UserId == loggedInUserId);
 
             var newTaskItem = new TaskItem
             {
                 Title = taskItemDto.Title,
                 ProjectId = taskItemDto.ProjectId,
                 Created_By = loggedInUserId,
+                CreatedByUser = CreatedByUser,
                 Status = taskItemDto.Status,
             };
 

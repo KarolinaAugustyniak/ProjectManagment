@@ -32,7 +32,10 @@ const Kanban = ({ status }) => {
 
     setTasks(updatedTasks);
 
-    const updatedTask = { ...taskToMove, status: destination.index };
+    const taskColumns = Object.keys(tasks);
+    const columnIndex = taskColumns.indexOf(destination.droppableId);
+
+    const updatedTask = { ...taskToMove, status: columnIndex };
 
     try {
       await axios.put(

@@ -462,6 +462,16 @@ p {
     border-radius: $borderRadius;
     transition: 0.5s;
   }
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  &__select {
+    padding: 6px 4px;
+    border-radius: 3px;
+    border: 1px solid $gray;
+  }
 }
 
 .due-to-date {
@@ -651,4 +661,7 @@ p {
   font-family: "Ubuntu", sans-serif;
   text-transform: uppercase;
   cursor: pointer;
+  margin-top: 40px;
+  margin-left: auto;
+  display: block;
 }

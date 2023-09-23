@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TaskManagment.Models;
 using TaskManagment.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace TaskManagment.Controllers
 {
@@ -70,5 +71,6 @@ namespace TaskManagment.Controllers
             var projects = _context.Projects.Where(p => p.OrganizationId == organizationId);
             return Ok(projects);
         }
+
     }
 }

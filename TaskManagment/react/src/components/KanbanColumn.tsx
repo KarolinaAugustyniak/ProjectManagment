@@ -45,11 +45,22 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
     setNewTask({ ...newTask, Title: event.target.value });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      submitTask();
+    }
+  };
+
   useOutsideClick(newTaskItem, async () => {
+    submitTask();
+  });
+
+  const submitTask = async () => {
     if (newTask.Title === "") {
       setAddNewTask(false);
     } else {
       setAddNewTask(false);
+      setNewTask({ ...newTask, Title: "" });
       try {
         const response = await axios.post(
           "https://localhost:7261/api/TaskItems",
@@ -68,7 +79,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
         console.error("Error:", error);
       }
     }
-  });
+  };
 
   //add focus on input when adding new task
   useEffect(() => {
@@ -98,6 +109,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
                   className="task-card__input"
                   ref={newTaskInputRef}
                   onChange={handleInputChange}
+                  onKeyDown={(e) => handleKeyDown(e)}
                 />
               </li>
             )}

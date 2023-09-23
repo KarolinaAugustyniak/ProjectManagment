@@ -18,10 +18,7 @@ const TaskComment = ({ comment }) => {
   return (
     <li className="task-comment">
       <div className="task-comment__wrapper">
-        <User
-          username={commentedByUser.username}
-          image={commentedByUser.profileImageFileName}
-        />
+        <User user={commentedByUser} />
         <p className="task-comment__date">{formattedDate}</p>
       </div>
       <p className="task-comment__text">{commentText}</p>

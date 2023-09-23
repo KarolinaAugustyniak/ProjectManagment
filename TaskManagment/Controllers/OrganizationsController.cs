@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using TaskManagment.Services;
 
 //using TaskManagment.Data;
 
@@ -16,10 +17,12 @@ namespace TaskManagment.Controllers
     public class OrganizationsController : ControllerBase
     {
         private readonly APIDbContext _context;
+        private readonly UserService _userService;
 
-        public OrganizationsController(APIDbContext context)
+        public OrganizationsController(APIDbContext context, UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -56,5 +59,17 @@ namespace TaskManagment.Controllers
 
         }
 
+        [HttpGet("getUsers")]
+        public ActionResult<IEnumerable<User>> GetUsersForOrganization()
+        {
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int organizationId = _userService.GetOrganizationIdForLoggedInUser(loggedInUserId);
+
+            var usersForOrganization = _context.Users
+                .Where(u => u.OrganizationId == organizationId)
+                .ToList();
+
+            return Ok(usersForOrganization);
+        }
     }
 }

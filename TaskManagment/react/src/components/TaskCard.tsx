@@ -45,10 +45,7 @@ export default function TaskCard({ task, index }: TaskCardProps) {
           </ul> */}
             <div className="task-card__bottom">
               {assignedToUser ? (
-                <User
-                  username={assignedToUser.username}
-                  image={assignedToUser.profileImageFileName}
-                />
+                <User user={assignedToUser} />
               ) : (
                 <p className="">Task not assigned</p>
               )}

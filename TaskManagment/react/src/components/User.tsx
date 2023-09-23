@@ -1,17 +1,15 @@
 import React from "react";
+import UserData from "../interfaces/UserData";
 
-interface UserInformationProps {
-  username: string;
-  image?: string;
-}
-
-export default function User({ username, image }: UserInformationProps) {
-  const imagePath = image ? `https://localhost:7261/images/${image}` : null;
+export default function User({ user }: UserData) {
+  const imagePath = user.profileImageFileName
+    ? `https://localhost:7261/images/${user.profileImageFileName}`
+    : null;
 
   return (
     <div className="user">
       {imagePath && <img src={imagePath} className="user__img" />}
-      <p>{username}</p>
+      <p>{user.username}</p>
     </div>
   );
 }
