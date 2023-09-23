@@ -4,6 +4,7 @@ import TaskComments from "./TaskComments";
 import DeleteTask from "./DeleteTask";
 import CloseIcon from "../assets/img/close.svg";
 import AssignTask from "./AssignTask";
+import TaskDescription from "./TaskDescription";
 
 interface Task {
   id: number;
@@ -47,6 +48,8 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
           </div>
 
           <AssignTask assignedToUser={assignedToUser} task={task} />
+          <TaskDescription task={task} />
+
           <DeleteTask taskId={taskId} />
           <TaskComments taskId={taskId} />
         </div>
