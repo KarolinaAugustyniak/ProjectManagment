@@ -519,18 +519,23 @@ p {
     align-items: center;
     margin-top: 26px;
     position: relative;
-    &::after {
-      display: block;
-      content: url(assets/img/arrow.svg);
-      position: absolute;
-      right: 0;
-      transition: 0.2s ease-in-out;
+    &--arrow {
+      &::after {
+        display: block;
+        content: url(assets/img/arrow.svg);
+        position: absolute;
+        right: 0;
+        transition: 0.2s ease-in-out;
+      }
     }
     &--open {
       &::after {
         transform: rotate(180deg);
       }
     }
+  }
+  &__link {
+    color: $black;
   }
   &__submenu {
     max-height: 0px;

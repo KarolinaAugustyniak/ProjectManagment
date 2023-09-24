@@ -5,6 +5,7 @@ import DeleteTask from "./DeleteTask";
 import CloseIcon from "../assets/img/close.svg";
 import AssignTask from "./AssignTask";
 import TaskDescription from "./TaskDescription";
+import Deadline from "./Deadline";
 
 interface Task {
   id: number;
@@ -49,7 +50,7 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
 
           <AssignTask assignedToUser={assignedToUser} task={task} />
           <TaskDescription task={task} />
-
+          <Deadline task={task} />
           <DeleteTask taskId={taskId} />
           <TaskComments taskId={taskId} />
         </div>

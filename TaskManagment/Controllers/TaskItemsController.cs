@@ -32,6 +32,7 @@ namespace TaskManagment.Controllers
           var taskItems = await _context.TaskItems
               .Where(x => x.ProjectId == projectId)
               .Include(x => x.AssignedToUser)
+              .Include(x => x.CreatedByUser)
               .ToListAsync();
 
           if (taskItems == null)

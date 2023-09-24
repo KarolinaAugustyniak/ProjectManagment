@@ -20,6 +20,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = (props) => {
         `https://localhost:7261/api/TaskItems/${task.taskId}`,
         {
           title: task.title,
+          status: task.status,
           description: description,
         },
         {
@@ -49,7 +50,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = (props) => {
       <p className="task-details__name">Description</p>
       <textarea
         onChange={(e) => setDescription(e.target.value)}
-        value={description}
+        value={description || ""}
         ref={descriptionRef}
         onBlur={handleSubmit}
       />

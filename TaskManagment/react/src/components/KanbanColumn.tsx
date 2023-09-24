@@ -19,12 +19,7 @@ interface KanbanColumnProps {
   tasksForColumn: Task[];
 }
 
-const KanbanColumn: React.FC<KanbanColumnProps> = ({
-  title,
-  index,
-  id,
-  tasksForColumn,
-}) => {
+const KanbanColumn: React.FC<KanbanColumnProps> = ({ title, index, id, tasksForColumn }) => {
   const { projectId } = useParams();
   const [newTask, setNewTask] = useState({
     Title: "",
@@ -62,15 +57,11 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       setAddNewTask(false);
       setNewTask({ ...newTask, Title: "" });
       try {
-        const response = await axios.post(
-          "https://localhost:7261/api/TaskItems",
-          newTask,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.post("https://localhost:7261/api/TaskItems", newTask, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setTasks((prevTasks) => ({
           ...prevTasks,
           [title]: [...prevTasks[title], response.data],
@@ -93,11 +84,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       <h2 className="kanban__title">{title}</h2>
       <Droppable droppableId={id}>
         {(provided) => (
-          <ul
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="kanban__list"
-          >
+          <ul ref={provided.innerRef} {...provided.droppableProps} className="kanban__list">
             {(tasksForColumn as Task[]).map((task, index) => (
               <TaskCard key={task.taskId} task={task} index={index} />
             ))}

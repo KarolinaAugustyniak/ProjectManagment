@@ -5,8 +5,9 @@ import KanbanColumn from "./KanbanColumn";
 import { useTaskContext } from "../context/TaskContext";
 import axios from "axios";
 
-const Kanban = ({ status }) => {
+const Kanban = () => {
   const { tasks, setTasks } = useTaskContext();
+  const status = Object.keys(tasks);
   const token = localStorage.getItem("token");
 
   const onDragEnd = async (result) => {
@@ -16,10 +17,7 @@ const Kanban = ({ status }) => {
       return;
     }
 
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
       return;
     }
 
@@ -38,15 +36,11 @@ const Kanban = ({ status }) => {
     const updatedTask = { ...taskToMove, status: columnIndex };
 
     try {
-      await axios.put(
-        `https://localhost:7261/api/TaskItems/${updatedTask.taskId}`,
-        updatedTask,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.put(`https://localhost:7261/api/TaskItems/${updatedTask.taskId}`, updatedTask, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } catch (error) {
       console.error(error);
     }
