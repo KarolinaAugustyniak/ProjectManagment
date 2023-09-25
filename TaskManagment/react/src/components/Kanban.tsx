@@ -4,12 +4,18 @@ import { DragDropContext } from "react-beautiful-dnd";
 import KanbanColumn from "./KanbanColumn";
 import { useTaskContext } from "../context/TaskContext";
 import axios from "axios";
+import Task from "../interfaces/Task";
 
-const Kanban = () => {
+interface KanbanProps {
+  filteredTasks: Record<string, Task[]>;
+}
+
+const Kanban: React.FC<KanbanProps> = ({ filteredTasks }) => {
   const { tasks, setTasks } = useTaskContext();
-  const status = Object.keys(tasks);
+  const status = Object.keys(filteredTasks);
   const token = localStorage.getItem("token");
 
+  //changing task status
   const onDragEnd = async (result) => {
     const { destination, source } = result;
 
@@ -49,15 +55,18 @@ const Kanban = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="kanban">
-        {status.map((statusItem, index) => (
-          <KanbanColumn
-            title={statusItem}
-            key={index}
-            index={index.toString()}
-            id={statusItem}
-            tasksForColumn={tasks[statusItem]}
-          />
-        ))}
+        {status.map((statusItem, index) => {
+          const tasksForColumn = filteredTasks[statusItem] || [];
+          return (
+            <KanbanColumn
+              title={statusItem}
+              key={index}
+              index={index.toString()}
+              id={statusItem}
+              tasksForColumn={tasksForColumn}
+            />
+          );
+        })}
       </div>
     </DragDropContext>
   );

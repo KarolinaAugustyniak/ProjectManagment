@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import User from "./User";
-import UserData from "../interfaces/UserData";
+import UserData from "../interfaces/User";
 import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
@@ -20,14 +20,11 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          "https://localhost:7261/api/Organizations/getUsers",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("https://localhost:7261/api/Organizations/getUsers", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsers(response.data);
       } catch (error) {
         console.error(error);
@@ -60,9 +57,7 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
       const statusString = statusMap[task.status];
 
       updatedTasks[statusString] = updatedTasks[statusString].map((t) =>
-        t.taskId === task.taskId
-          ? { ...t, assignedTo: assignedUserId, assignedToUser: assignedUser }
-          : t
+        t.taskId === task.taskId ? { ...t, assignedTo: assignedUserId, assignedToUser: assignedUser } : t
       );
 
       setTasks(updatedTasks);
@@ -77,19 +72,13 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
       {assignedToUser ? (
         <div className="task-details__user">
           <User user={assignedToUser} />
-          <button
-            onClick={() => handleAssignUser(null)}
-            className="task-details__close"
-          >
+          <button onClick={() => handleAssignUser(null)} className="task-details__close">
             <img src={CloseIcon} alt="close" />
           </button>
         </div>
       ) : (
         <div>
-          <select
-            onChange={(e) => handleAssignUser(parseInt(e.target.value))}
-            className="task-details__select"
-          >
+          <select onChange={(e) => handleAssignUser(parseInt(e.target.value))} className="task-details__select">
             <option value="">Select a user</option>
             {users.map((user) => (
               <option key={user.userId} value={user.userId}>
