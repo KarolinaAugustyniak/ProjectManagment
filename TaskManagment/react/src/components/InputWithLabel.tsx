@@ -6,14 +6,9 @@ interface InputWithLabelProps {
   type: string;
   img: string;
   label?: string;
+  value: string | null;
 }
-const InputWithLabel: React.FC<InputWithLabelProps> = ({
-  name,
-  handleChange,
-  type,
-  img,
-  label,
-}) => {
+const InputWithLabel: React.FC<InputWithLabelProps> = ({ name, handleChange, type, img, label, value }) => {
   return (
     <div className="input-border">
       <input
@@ -23,6 +18,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
         placeholder=""
         className="input-border__input"
         onChange={handleChange}
+        value={value || ""}
       />
       <div className="input-border__wrapper">
         <img src={img} />

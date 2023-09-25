@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTaskContext } from "../context/TaskContext";
+import InputWithLabel from "./InputWithLabel";
+import Search from "../assets/img/search.svg";
 
 interface NavigationAndSearchProps {
+  currentView: string;
   switchToKanbanView: () => void;
   switchToListView: () => void;
   setFilteredTasks: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const NavigationAndSearch: React.FC<NavigationAndSearchProps> = ({
+  currentView,
   switchToKanbanView,
   switchToListView,
   setFilteredTasks,
@@ -17,7 +21,10 @@ const NavigationAndSearch: React.FC<NavigationAndSearchProps> = ({
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    const searchTerm = e.target.value.toLowerCase();
+  };
+
+  const handleSearch = () => {
+    const searchTerm = search.toLowerCase();
     const tasksForSearch = { ...tasks };
 
     for (const status in tasks) {
@@ -28,14 +35,22 @@ const NavigationAndSearch: React.FC<NavigationAndSearchProps> = ({
     setFilteredTasks(tasksForSearch);
   };
 
+  useEffect(() => {
+    handleSearch();
+  }, [tasks, search]);
+
   return (
-    <div className="">
-      <ul>
-        <li onClick={switchToKanbanView}>Kanban board</li>
-        <li onClick={switchToListView}>List</li>
+    <section className="nav">
+      <ul className="nav__list">
+        <li onClick={switchToKanbanView} className={`nav__view ${currentView === "kanban" && "nav__view--active"}`}>
+          Kanban board
+        </li>
+        <li onClick={switchToListView} className={`nav__view ${currentView === "list" && "nav__view--active"}`}>
+          List
+        </li>
       </ul>
-      <input type="text" value={search} onChange={handleSearchChange} />
-    </div>
+      <InputWithLabel handleChange={handleSearchChange} name="search" img={Search} type="text" value={search} />
+    </section>
   );
 };
 

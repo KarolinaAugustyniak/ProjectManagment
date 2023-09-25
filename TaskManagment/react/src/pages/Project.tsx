@@ -1,18 +1,17 @@
 // Project.tsx
 import React, { useEffect, useState } from "react";
-import Kanban from "../components/Kanban";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Layout from "../layouts/Layout";
 import { useTaskContext } from "../context/TaskContext";
 import NavigationAndSearch from "../components/NavigationAndSearch";
-import TaskList from "../components/TaskList";
+import Tasks from "../components/Tasks";
 
 export default function Project() {
   const { projectId } = useParams();
   const token = localStorage.getItem("token");
   const { tasks, setTasks } = useTaskContext();
-  const [currentView, setCurrentView] = useState("kanban");
+  const [currentView, setCurrentView] = useState("list");
   const [filteredTasks, setFilteredTasks] = useState({});
 
   useEffect(() => {
@@ -37,7 +36,6 @@ export default function Project() {
         });
 
         setTasks(updatedTasks);
-        setFilteredTasks(updatedTasks);
       } catch (error) {
         console.error("Error fetching project data:", error);
       }
@@ -54,8 +52,7 @@ export default function Project() {
         switchToListView={() => setCurrentView("list")}
         setFilteredTasks={setFilteredTasks}
       />
-      {currentView === "kanban" && <Kanban filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />}
-      {currentView === "list" && <TaskList />}
+      <Tasks filteredTasks={filteredTasks} currentView={currentView} />
     </Layout>
   );
 }

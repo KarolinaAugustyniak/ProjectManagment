@@ -339,23 +339,69 @@ p {
     list-style-type: none;
     flex-grow: 1;
   }
+  &__add-task {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+  }
 }
 
-.add-task {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.56px;
-  text-transform: uppercase;
-  background-color: unset;
-  border: none;
-  cursor: pointer;
+.list {
+  &__title {
+    font-size: 24px;
+  }
+  &__li {
+    &:not(:last-child) {
+      border-bottom: 1px solid $borderColor;
+    }
+  }
+  &__element {
+    display: flex;
+    padding: 4px;
+  }
+  &__task-title {
+    width: 60%;
+  }
+  &__task-user {
+    width: 20%;
+  }
+  &__task-date {
+    width: 20%;
+  }
+  &__add-task {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+    img {
+      width: 10px;
+    }
+  }
+  &__ul {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+  }
 }
 
 .task-card {
@@ -669,4 +715,39 @@ p {
   margin-top: 40px;
   margin-left: auto;
   display: block;
+}
+
+.nav {
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  background-color: $background;
+  margin-bottom: 40px;
+  &__list {
+    list-style-type: none;
+    padding-left: 14px;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+  }
+  &__view {
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.64px;
+    text-transform: uppercase;
+    &--active {
+      opacity: 1;
+    }
+  }
+  .input-border {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
 }

@@ -1,16 +1,16 @@
-// Kanban.tsx
 import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import KanbanColumn from "./KanbanColumn";
 import { useTaskContext } from "../context/TaskContext";
 import axios from "axios";
 import Task from "../interfaces/Task";
+import TaskStatusGroup from "./TaskStatusGroup";
 
-interface KanbanProps {
+interface TasksProps {
   filteredTasks: Record<string, Task[]>;
+  currentView: string;
 }
 
-const Kanban: React.FC<KanbanProps> = ({ filteredTasks }) => {
+const Tasks: React.FC<TasksProps> = ({ filteredTasks, currentView }) => {
   const { tasks, setTasks } = useTaskContext();
   const status = Object.keys(filteredTasks);
   const token = localStorage.getItem("token");
@@ -54,16 +54,17 @@ const Kanban: React.FC<KanbanProps> = ({ filteredTasks }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="kanban">
+      <div className={`${currentView}`}>
         {status.map((statusItem, index) => {
           const tasksForColumn = filteredTasks[statusItem] || [];
           return (
-            <KanbanColumn
+            <TaskStatusGroup
               title={statusItem}
               key={index}
               index={index.toString()}
               id={statusItem}
               tasksForColumn={tasksForColumn}
+              currentView={currentView}
             />
           );
         })}
@@ -72,4 +73,4 @@ const Kanban: React.FC<KanbanProps> = ({ filteredTasks }) => {
   );
 };
 
-export default Kanban;
+export default Tasks;
