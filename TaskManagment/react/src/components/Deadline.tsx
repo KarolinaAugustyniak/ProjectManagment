@@ -13,12 +13,15 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
   const { tasks, setTasks } = useTaskContext();
 
   // Format the date as "YYYY-MM-DD"
-  const originalDate = new Date(task.dueDate);
-  const formattedDate = `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
+  const originalDate = new Date(task.dueDate || "");
+  const formattedDate = task.dueDate
+    ? `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1).toString().padStart(2, "0")}-${originalDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`
+    : "";
 
-  const [dueDate, setDueDate] = useState(formattedDate || "");
+  const [dueDate, setDueDate] = useState(formattedDate);
 
   const handleDueDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDueDate(e.target.value);
@@ -31,7 +34,7 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
         {
           title: task.title,
           status: task.status,
-          dueDate: dueDate,
+          dueDate: dueDate || null,
         },
         {
           headers: {
@@ -46,7 +49,7 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
       const statusString = statusMap[task.status];
 
       updatedTasks[statusString] = updatedTasks[statusString].map((t) =>
-        t.taskId === task.taskId ? { ...t, dueDate: dueDate } : t
+        t.taskId === task.taskId ? { ...t, dueDate: dueDate || null } : t
       );
 
       setTasks(updatedTasks);
@@ -62,12 +65,12 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
         <input
           type="date"
           className="task-details__element"
-          value={dueDate || ""}
+          value={dueDate}
           onChange={handleDueDateChange}
           onBlur={handleUpdateDueDate}
         />
-        {dueDate && (
-          <button onClick={() => setDueDate(null)} className="task-details__close">
+        {dueDate !== "" && (
+          <button onClick={() => setDueDate("")} className="task-details__close">
             <img src={CloseIcon} alt="close" />
           </button>
         )}
