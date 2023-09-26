@@ -122,7 +122,7 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tas
                   <TaskListElement key={task.taskId} task={task} index={index} />
                 ))}
                 {addNewTask && (
-                  <li className="task-card" ref={newTaskItem}>
+                  <li className="list__element" ref={newTaskItem}>
                     <input
                       type="text"
                       placeholder="Add task title"

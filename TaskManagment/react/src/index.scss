@@ -11,6 +11,9 @@ $primaryFont: "Ubuntu", sans-serif;
 
 //z-index
 $taskDetails: 50;
+$menuBtn: 40;
+$sidebar: 30;
+$popupOverlay: 20;
 
 :root {
   font-family: $primaryFont;
@@ -198,6 +201,7 @@ p {
     left: 14px;
     top: 12px;
     pointer-events: none;
+    align-items: center;
   }
 
   &__label {
@@ -224,10 +228,6 @@ p {
 
 @media only screen and (max-width: 992px) {
   .input-border {
-    &__wrapper {
-      top: 15px;
-    }
-
     &__label {
       font-size: 12px;
     }
@@ -359,25 +359,39 @@ p {
 
 .list {
   &__title {
-    font-size: 24px;
+    font-size: 18px;
+    margin-top: 38px;
+    margin-bottom: 0px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $borderColor;
+    background-color: $background;
   }
-  &__li {
-    &:not(:last-child) {
-      border-bottom: 1px solid $borderColor;
+
+  &__position {
+    display: flex;
+    border-bottom: 1px solid $borderColor;
+    margin-top: -1px;
+    &:first-child {
+      border-top: 1px solid $borderColor;
     }
   }
   &__element {
-    display: flex;
-    padding: 4px;
+    padding: 10px;
+    overflow: auto;
+    background: $white;
+    min-width: 100px;
   }
   &__task-title {
     width: 60%;
   }
   &__task-user {
     width: 20%;
+    border-left: 1px solid $borderColor;
   }
   &__task-date {
     width: 20%;
+    border-left: 1px solid $borderColor;
   }
   &__add-task {
     display: flex;
@@ -385,7 +399,6 @@ p {
     align-items: center;
     margin-top: 10px;
     margin-bottom: 15px;
-
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.56px;
@@ -402,6 +415,11 @@ p {
     margin: 0;
     list-style-type: none;
   }
+}
+
+.gray-text {
+  color: $gray;
+  font-size: 14px;
 }
 
 .task-card {
@@ -457,7 +475,7 @@ p {
   left: 0;
   top: 0;
   right: 0;
-  right: 0;
+  z-index: $popupOverlay;
   height: 100vh;
 }
 
@@ -499,6 +517,17 @@ p {
     margin-top: 15px;
     margin-bottom: 15px;
     align-items: center;
+    justify-content: space-between;
+    min-height: 32px;
+    > *:nth-child(2n) {
+      max-width: 335px;
+      width: 100%;
+    }
+  }
+  &__wrap {
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
   &__close {
     cursor: pointer;
@@ -508,15 +537,26 @@ p {
     border-radius: $borderRadius;
     transition: 0.5s;
   }
+  &__element {
+    flex-grow: 1;
+    border-radius: $borderRadius;
+    border: 1px solid $gray;
+    padding: 6px;
+  }
   &__user {
     display: flex;
     align-items: center;
     gap: 9px;
   }
-  &__select {
-    padding: 6px 4px;
-    border-radius: 3px;
-    border: 1px solid $gray;
+}
+
+@media only screen and (max-width: 520px) {
+  .task-details {
+    &__wrapper {
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-start;
+    }
   }
 }
 
@@ -539,6 +579,7 @@ p {
   padding: 15px;
   display: flex;
   justify-content: center;
+  transition: 0.3s;
   &__container {
     max-width: 200px;
     width: 100%;
@@ -549,6 +590,23 @@ p {
     margin-right: auto;
     margin-top: 4vw;
     margin-bottom: 10vw;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    z-index: $sidebar;
+    min-height: 100vh;
+
+    &__logo {
+      margin-top: 90px;
+    }
+    &--hidden {
+      transform: translate(-100%, 0);
+      //  width: 0;
+      overflow: hidden;
+    }
   }
 }
 
@@ -604,12 +662,38 @@ p {
   }
 }
 
+.menu-btn {
+  display: none;
+  z-index: $menuBtn;
+}
+
+@media only screen and (max-width: 992px) {
+  .menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+    position: absolute;
+    background: white;
+    padding: 10px;
+    left: 15px;
+    top: 15px;
+    cursor: pointer;
+    background-color: $primary;
+  }
+}
+
 .main {
   display: flex;
   justify-content: center;
   width: 100%;
 }
-
+@media only screen and (max-width: 992px) {
+  .main {
+    padding-top: 35px;
+  }
+}
 .container {
   max-width: 1390px;
   width: 100%;
@@ -742,6 +826,8 @@ p {
     font-weight: 500;
     letter-spacing: 0.64px;
     text-transform: uppercase;
+    text-align: center;
+    align-self: center;
     &--active {
       opacity: 1;
     }

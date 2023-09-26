@@ -14,9 +14,7 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
 
   // Format the date as "YYYY-MM-DD"
   const originalDate = new Date(task.dueDate);
-  const formattedDate = `${originalDate.getFullYear()}-${(
-    originalDate.getMonth() + 1
-  )
+  const formattedDate = `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1)
     .toString()
     .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
 
@@ -60,20 +58,20 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
   return (
     <div className="task-details__wrapper">
       <p className="task-details__name">Due to</p>
-      <input
-        type="date"
-        value={dueDate || ""}
-        onChange={handleDueDateChange}
-        onBlur={handleUpdateDueDate}
-      />
-      {dueDate && (
-        <button
-          onClick={() => setDueDate(null)}
-          className="task-details__close"
-        >
-          <img src={CloseIcon} alt="close" />
-        </button>
-      )}
+      <div className="task-details__wrap">
+        <input
+          type="date"
+          className="task-details__element"
+          value={dueDate || ""}
+          onChange={handleDueDateChange}
+          onBlur={handleUpdateDueDate}
+        />
+        {dueDate && (
+          <button onClick={() => setDueDate(null)} className="task-details__close">
+            <img src={CloseIcon} alt="close" />
+          </button>
+        )}
+      </div>
     </div>
   );
 };

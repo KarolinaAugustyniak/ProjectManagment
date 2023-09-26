@@ -53,6 +53,7 @@ const TaskDescription: React.FC<TaskDescriptionProps> = (props) => {
         value={description || ""}
         ref={descriptionRef}
         onBlur={handleSubmit}
+        className="task-details__element"
       />
     </div>
   );

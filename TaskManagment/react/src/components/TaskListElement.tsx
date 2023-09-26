@@ -27,19 +27,23 @@ export default function TaskListElement({ task, index }: TaskListElementProps) {
   };
 
   return (
-    <li className="list__li">
+    <li>
       <Draggable draggableId={taskId.toString()} index={index}>
         {(provided) => (
           <div
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="list__element"
+            className="list__position"
             onClick={openDetails}
           >
-            <div className="list__task-title"> {title} </div>
-            <div className="list__task-user"> {assignedToUser ? <User user={assignedToUser} /> : <></>}</div>
-            <div className="list__task-date">{dueDate ? <p>{formattedDate}</p> : <></>}</div>
+            <div className="list__task-title list__element"> {title} </div>
+            <div className="list__task-user list__element">
+              {assignedToUser ? <User user={assignedToUser} /> : <p className="gray-text">Task not assigned</p>}
+            </div>
+            <div className="list__task-date list__element">
+              {dueDate ? <p>{formattedDate}</p> : <p className="gray-text">Deadline not set</p>}
+            </div>
           </div>
         )}
       </Draggable>

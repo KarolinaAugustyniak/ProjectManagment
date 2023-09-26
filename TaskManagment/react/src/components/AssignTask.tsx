@@ -77,16 +77,14 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
           </button>
         </div>
       ) : (
-        <div>
-          <select onChange={(e) => handleAssignUser(parseInt(e.target.value))} className="task-details__select">
-            <option value="">Select a user</option>
-            {users.map((user) => (
-              <option key={user.userId} value={user.userId}>
-                {user.username}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select onChange={(e) => handleAssignUser(parseInt(e.target.value))} className="task-details__element">
+          <option value="">Select a user</option>
+          {users.map((user) => (
+            <option key={user.userId} value={user.userId}>
+              {user.username}
+            </option>
+          ))}
+        </select>
       )}
     </div>
   );
