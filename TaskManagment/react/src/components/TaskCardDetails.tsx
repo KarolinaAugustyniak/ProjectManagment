@@ -6,16 +6,7 @@ import CloseIcon from "../assets/img/close.svg";
 import AssignTask from "./AssignTask";
 import TaskDescription from "./TaskDescription";
 import Deadline from "./Deadline";
-
-interface Task {
-  id: number;
-  title: string;
-  assignedToUser?: {
-    username: string;
-    profileImageFileName: string;
-  };
-  dueDate?: Date;
-}
+import Task from "../interfaces/Task";
 
 interface TaskCardDetailsProps {
   task: Task;
@@ -23,14 +14,12 @@ interface TaskCardDetailsProps {
 }
 
 const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
-  const { taskId, title, assignedToUser, dueDate, description, createdByUser } =
-    task;
+  const { taskId, title, assignedToUser, createdByUser } = task;
 
   //task creation date
   const creationDate = new Date(task.creationDate);
   const formattedCreationDate = creationDate.toLocaleDateString();
 
-  console.log(task);
   return (
     <>
       <div className="task-details">
@@ -40,14 +29,12 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
             <img src={CloseIcon} alt="close" />
           </button>
         </div>
-
         <div className="task-details__content">
           <div className="task-details__created">
             Created by
             <User user={createdByUser} />
-            on {formattedCreationDate}{" "}
+            on {formattedCreationDate}
           </div>
-
           <AssignTask assignedToUser={assignedToUser} task={task} />
           <TaskDescription task={task} />
           <Deadline task={task} />

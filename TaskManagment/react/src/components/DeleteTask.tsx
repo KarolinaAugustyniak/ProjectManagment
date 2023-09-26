@@ -13,8 +13,6 @@ const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
 
   const handleClick = async () => {
     try {
-      console.log(taskId);
-
       await axios.delete(`https://localhost:7261/api/taskitems/${taskId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -25,9 +23,7 @@ const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
       const updatedTasks = { ...tasks };
 
       for (const column in updatedTasks) {
-        updatedTasks[column] = updatedTasks[column].filter(
-          (task) => task.taskId !== taskId
-        );
+        updatedTasks[column] = updatedTasks[column].filter((task) => task.taskId !== taskId);
       }
 
       setTasks(updatedTasks);

@@ -44,7 +44,7 @@ const UserProfileImage = () => {
 
   return (
     <div>
-      <h2>File Upload</h2>
+      <h3>File Upload</h3>
       <input type="file" onChange={handleFileSelect} />
       <button onClick={handleUpload}>Upload</button>
       {successMessage && <p className="success">{successMessage}</p>}
