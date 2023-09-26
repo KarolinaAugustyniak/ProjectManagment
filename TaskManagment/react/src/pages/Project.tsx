@@ -11,7 +11,7 @@ export default function Project() {
   const { projectId } = useParams();
   const token = localStorage.getItem("token");
   const { tasks, setTasks } = useTaskContext();
-  const [currentView, setCurrentView] = useState("list");
+  const [currentView, setCurrentView] = useState("kanban");
   const [filteredTasks, setFilteredTasks] = useState({});
 
   useEffect(() => {

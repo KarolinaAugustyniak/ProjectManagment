@@ -356,6 +356,23 @@ p {
     cursor: pointer;
   }
 }
+@media only screen and (max-width: 768px) {
+  .kanban {
+    flex-wrap: wrap;
+    &__column {
+      max-width: unset;
+      width: calc(50% - 10px);
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .kanban {
+    &__column {
+      width: 100%;
+    }
+  }
+}
 
 .list {
   &__title {
@@ -371,6 +388,7 @@ p {
   &__position {
     display: flex;
     border-bottom: 1px solid $borderColor;
+    background-color: $white;
     margin-top: -1px;
     &:first-child {
       border-top: 1px solid $borderColor;
@@ -386,10 +404,6 @@ p {
     width: 60%;
   }
   &__task-user {
-    width: 20%;
-    border-left: 1px solid $borderColor;
-  }
-  &__task-date {
     width: 20%;
     border-left: 1px solid $borderColor;
   }
@@ -409,11 +423,38 @@ p {
     img {
       width: 10px;
     }
+    &__task-date {
+      width: 20%;
+      border-left: 1px solid $borderColor;
+    }
   }
   &__ul {
     padding-left: 0;
     margin: 0;
     list-style-type: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .list {
+    &__position {
+      flex-direction: column;
+      padding: 12px;
+    }
+    &__element {
+      padding: 4px;
+    }
+    &__task-title {
+      width: 100%;
+    }
+    &__task-user {
+      width: 100%;
+      border-left: none;
+    }
+    &__task-user {
+      width: 100%;
+      border-left: none;
+    }
   }
 }
 
@@ -835,5 +876,13 @@ p {
   .input-border {
     margin-bottom: 0px;
     margin-top: 0px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
   }
 }
