@@ -7,7 +7,7 @@ import Position from "../assets/img/position.svg";
 import { Link } from "react-router-dom";
 import LoginLayout from "../layouts/LoginLayout";
 import InputWithLabel from "../components/InputWithLabel";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 interface UserRegister {
   username: string;
@@ -46,7 +46,7 @@ export default function Register() {
       );
       const token = response.data;
       localStorage.setItem("token", token);
-      navigate('/welcome');
+      navigate("/welcome");
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {
@@ -67,18 +67,21 @@ export default function Register() {
             img={User}
             handleChange={handleChange}
             type="text"
+            value={formData.username}
           />
           <InputWithLabel
             name="email"
             img={Email}
             handleChange={handleChange}
             type="email"
+            value={formData.email}
           />
           <InputWithLabel
             name="password"
             img={Password}
             handleChange={handleChange}
             type="password"
+            value={formData.password}
           />
           <InputWithLabel
             label="confirm Password"
@@ -86,12 +89,14 @@ export default function Register() {
             img={Password}
             handleChange={handleChange}
             type="password"
+            value={formData.confirmPassword}
           />
           <InputWithLabel
             name="position"
             img={Position}
             handleChange={handleChange}
             type="text"
+            value={formData.position}
           />
           {error && <p className="login__error">{error}</p>}
           <button type="submit" className="login__btn btn btn--main">

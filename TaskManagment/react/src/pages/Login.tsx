@@ -5,7 +5,7 @@ import Password from "../assets/img/locked.svg";
 import { Link } from "react-router-dom";
 import LoginLayout from "../layouts/LoginLayout";
 import InputWithLabel from "../components/InputWithLabel";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 interface UserLogin {
   username: string;
@@ -34,7 +34,7 @@ export default function Login() {
       );
       const token = response.data;
       localStorage.setItem("token", token);
-      navigate('/welcome');
+      navigate("/welcome");
     } catch (err) {
       setError("Invalid username or password");
     }
@@ -50,12 +50,14 @@ export default function Login() {
             img={User}
             handleChange={handleChange}
             type="text"
+            value={formData.username}
           />
           <InputWithLabel
             name="password"
             img={Password}
             handleChange={handleChange}
             type="password"
+            value={formData.password}
           />
           {error && <p className="login__error">{error}</p>}
           <button type="submit" className="login__btn btn btn--main">

@@ -27,7 +27,7 @@ namespace TaskManagment.Controllers
             int organizationId = _userService.GetOrganizationIdForLoggedInUser(loggedInUserId);
 
             // Generate a new invitation code
-            string invitationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8);
+            string invitationCode = Guid.NewGuid().ToString("N").Substring(0, 8);
 
             // Create the invitation
             var invitation = new Invitation

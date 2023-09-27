@@ -9,11 +9,15 @@ const GenerateInvitationCode: React.FC = () => {
 
   const handleGenerateCode = async () => {
     try {
-      const response = await axios.post(`https://localhost:7261/api/invitation/generate/${expirationDays}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `https://localhost:7261/api/invitation/generate/${expirationDays}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setInvitationCode(response.data);
     } catch (error) {
@@ -33,7 +37,12 @@ const GenerateInvitationCode: React.FC = () => {
       <h3>Generate Invitation Code</h3>
       <div>
         <label htmlFor="expirationDays">Expiration Days:</label>
-        <input type="number" id="expirationDays" value={expirationDays} onChange={handleExpirationChange} />
+        <input
+          type="number"
+          id="expirationDays"
+          value={expirationDays}
+          onChange={handleExpirationChange}
+        />
       </div>
       <button onClick={handleGenerateCode}>Generate Code</button>
       {error && <p className="error">{error}</p>}
