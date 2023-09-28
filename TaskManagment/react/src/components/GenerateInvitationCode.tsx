@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Invitation from "../interfaces/Invitation";
 
-const GenerateInvitationCode: React.FC = () => {
+const GenerateInvitationCode: React.FC = ({ setInvitationCodes }) => {
   const [expirationDays, setExpirationDays] = useState<number>(7);
   const [error, setError] = useState("");
-  const [invitationCode, setInvitationCode] = useState("");
   const token = localStorage.getItem("token");
 
   const handleGenerateCode = async () => {
+    if (isNaN(expirationDays)) {
+      setError("Expiration days must be a number.");
+    }
     try {
       const response = await axios.post(
         `https://localhost:7261/api/invitation/generate/${expirationDays}`,
@@ -19,8 +22,9 @@ const GenerateInvitationCode: React.FC = () => {
         }
       );
 
-      setInvitationCode(response.data);
+      setInvitationCodes((prev: Invitation[]) => [...prev, response.data]);
     } catch (error) {
+      console.error(error);
       setError("Error generating invitation code");
     }
   };
@@ -33,18 +37,24 @@ const GenerateInvitationCode: React.FC = () => {
   };
 
   return (
-    <div>
-      <h3>Generate Invitation Code</h3>
-      <div>
+    <div className="settings__group">
+      <h3 className="settings__title">Generate Invitation Code</h3>
+      <div className="settings__wrapper">
         <label htmlFor="expirationDays">Expiration Days:</label>
         <input
           type="number"
           id="expirationDays"
           value={expirationDays}
           onChange={handleExpirationChange}
+          className="input"
         />
       </div>
-      <button onClick={handleGenerateCode}>Generate Code</button>
+      <button
+        onClick={handleGenerateCode}
+        className="small-btn small-btn--center"
+      >
+        Generate Code
+      </button>
       {error && <p className="error">{error}</p>}
     </div>
   );

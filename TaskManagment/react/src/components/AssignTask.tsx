@@ -4,7 +4,7 @@ import UserData from "../interfaces/User";
 import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
-import CloseIcon from "../assets/img/close.svg";
+import CloseButton from "./CloseButton";
 
 interface AssignTaskProps {
   assignedToUser?: UserData;
@@ -20,11 +20,14 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://localhost:7261/api/Organizations/getUsers", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://localhost:7261/api/Organizations/getUsers",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setUsers(response.data);
       } catch (error) {
         console.error(error);
@@ -57,7 +60,9 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
       const statusString = statusMap[task.status];
 
       updatedTasks[statusString] = updatedTasks[statusString].map((t) =>
-        t.taskId === task.taskId ? { ...t, assignedTo: assignedUserId, assignedToUser: assignedUser } : t
+        t.taskId === task.taskId
+          ? { ...t, assignedTo: assignedUserId, assignedToUser: assignedUser }
+          : t
       );
 
       setTasks(updatedTasks);
@@ -72,12 +77,13 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
       {assignedToUser ? (
         <div className="task-details__user">
           <User user={assignedToUser} />
-          <button onClick={() => handleAssignUser(null)} className="task-details__close">
-            <img src={CloseIcon} alt="close" />
-          </button>
+          <CloseButton onClick={() => handleAssignUser(null)} />
         </div>
       ) : (
-        <select onChange={(e) => handleAssignUser(parseInt(e.target.value))} className="task-details__element">
+        <select
+          onChange={(e) => handleAssignUser(parseInt(e.target.value))}
+          className="task-details__element"
+        >
           <option value="">Select a user</option>
           {users.map((user) => (
             <option key={user.userId} value={user.userId}>

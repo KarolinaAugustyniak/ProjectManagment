@@ -1,19 +1,18 @@
-import React from "react";
 import User from "./User";
 import TaskComments from "./TaskComments";
 import DeleteTask from "./DeleteTask";
-import CloseIcon from "../assets/img/close.svg";
 import AssignTask from "./AssignTask";
 import TaskDescription from "./TaskDescription";
 import Deadline from "./Deadline";
 import Task from "../interfaces/Task";
+import CloseButton from "./CloseButton";
 
 interface TaskCardDetailsProps {
   task: Task;
   onClose: () => void;
 }
 
-const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
+const TaskCardDetails = ({ task, onClose }: TaskCardDetailsProps) => {
   const { taskId, title, assignedToUser, createdByUser } = task;
 
   //task creation date
@@ -25,9 +24,7 @@ const TaskCardDetails: React.FC<TaskCardDetailsProps> = ({ task, onClose }) => {
       <div className="task-details">
         <div className="task-details__header">
           <h3 className="task-details__title">{title}</h3>
-          <button className="task-details__close" onClick={onClose}>
-            <img src={CloseIcon} alt="close" />
-          </button>
+          <CloseButton onClick={onClose} />
         </div>
         <div className="task-details__content">
           <div className="task-details__created">

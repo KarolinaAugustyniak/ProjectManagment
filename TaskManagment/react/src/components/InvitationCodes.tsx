@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InvitationCodesTable from "./InvitationCodesTable";
+import Invitation from "../interfaces/Invitation";
 
-const InvitationCodes: React.FC = () => {
+interface InvitationCodesProps {
+  invitationCodes: Invitation[];
+  setInvitationCodes: React.Dispatch<React.SetStateAction<Invitation[]>>;
+}
+
+const InvitationCodes: React.FC<InvitationCodesProps> = ({
+  invitationCodes,
+  setInvitationCodes,
+}) => {
   const [error, setError] = useState("");
-  const [invitationCodes, setInvitationCodes] = useState("");
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -28,33 +36,12 @@ const InvitationCodes: React.FC = () => {
     }
   };
 
-  const handleDelete = async (invitationId) => {
-    try {
-      await axios.delete(
-        `https://localhost:7261/api/invitation/${invitationId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setInvitationCodes((prevInvitations) =>
-        prevInvitations.filter(
-          (invitation) => invitation.invitationId !== invitationId
-        )
-      );
-    } catch (error) {
-      setError("Error deleting invitation");
-    }
-  };
-
   return (
-    <div>
-      <h3>Invitation Codes</h3>
+    <div className="settings__group">
+      <h3 className="settings__title">Invitation Codes</h3>
       <InvitationCodesTable
         invitationCodes={invitationCodes}
-        onDelete={handleDelete}
+        setInvitationCodes={setInvitationCodes}
       />
       {error && <p className="error">{error}</p>}
     </div>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const InvitationCodesTable: React.FC = ({ invitationCodes }) => {
+const InvitationCodesTable: React.FC = ({
+  invitationCodes,
+  setInvitationCodes,
+}) => {
   const token = localStorage.getItem("token");
   const dateOptions = {
     year: "numeric",
@@ -11,12 +14,31 @@ const InvitationCodesTable: React.FC = ({ invitationCodes }) => {
     minute: "2-digit",
   };
 
-  const onDelete = async () => {};
+  const onDelete = async (invitationCode) => {
+    try {
+      await axios.delete(
+        `https://localhost:7261/api/invitation/delete/${invitationCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setInvitationCodes((prev) =>
+        prev.filter(
+          (invitation) => invitation.invitationCode !== invitationCode
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       {invitationCodes ? (
-        <table>
+        <table className="invitation-table">
           <thead>
             <tr>
               <th>Invitation Code</th>
@@ -35,7 +57,7 @@ const InvitationCodesTable: React.FC = ({ invitationCodes }) => {
                   )}
                 </td>
                 <td>
-                  <button onClick={() => onDelete(invitation.invitationId)}>
+                  <button onClick={() => onDelete(invitation.invitationCode)}>
                     Delete
                   </button>
                 </td>

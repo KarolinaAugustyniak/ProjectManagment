@@ -63,6 +63,27 @@ a {
   }
 }
 
+.small-btn {
+  background-color: #5792c3;
+  border: none;
+  padding: 10px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  border-radius: $borderRadius;
+  color: $white;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin: 16px 0;
+  cursor: pointer;
+
+  &--center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 p {
   margin: 0;
 }
@@ -235,14 +256,14 @@ p {
 }
 
 //if input is focused then label should be above input
-.input-border__input:focus + .input-border__wrapper label {
+.input-border__input:focus+.input-border__wrapper label {
   transform: translate(-40px, -30px);
   font-size: 12px;
   color: $primary;
 }
 
 //if input have content then label should be above input
-.input-border__input:not(:placeholder-shown) + .input-border__wrapper label {
+.input-border__input:not(:placeholder-shown)+.input-border__wrapper label {
   transform: translate(-40px, -30px);
   font-size: 12px;
 }
@@ -315,6 +336,7 @@ p {
 .kanban {
   display: flex;
   gap: 20px;
+
   &__column {
     max-width: 350px;
     width: 25%;
@@ -325,6 +347,7 @@ p {
     display: flex;
     flex-direction: column;
   }
+
   &__title {
     font-size: 20px;
     font-weight: 700;
@@ -333,12 +356,14 @@ p {
     text-align: center;
     padding: 5px;
   }
+
   &__list {
     padding: 8px;
     margin: 0;
     list-style-type: none;
     flex-grow: 1;
   }
+
   &__add-task {
     display: flex;
     gap: 10px;
@@ -356,9 +381,11 @@ p {
     cursor: pointer;
   }
 }
+
 @media only screen and (max-width: 768px) {
   .kanban {
     flex-wrap: wrap;
+
     &__column {
       max-width: unset;
       width: calc(50% - 10px);
@@ -390,23 +417,28 @@ p {
     border-bottom: 1px solid $borderColor;
     background-color: $white;
     margin-top: -1px;
+
     &:first-child {
       border-top: 1px solid $borderColor;
     }
   }
+
   &__element {
     padding: 10px;
     overflow: auto;
     background: $white;
     min-width: 100px;
   }
+
   &__task-title {
     width: 60%;
   }
+
   &__task-user {
     width: 20%;
     border-left: 1px solid $borderColor;
   }
+
   &__add-task {
     display: flex;
     gap: 10px;
@@ -420,14 +452,17 @@ p {
     background-color: unset;
     border: none;
     cursor: pointer;
+
     img {
       width: 10px;
     }
-    &__task-date {
-      width: 20%;
-      border-left: 1px solid $borderColor;
-    }
   }
+
+  &__task-date {
+    width: 20%;
+    border-left: 1px solid $borderColor;
+  }
+
   &__ul {
     padding-left: 0;
     margin: 0;
@@ -441,16 +476,20 @@ p {
       flex-direction: column;
       padding: 12px;
     }
+
     &__element {
       padding: 4px;
     }
+
     &__task-title {
       width: 100%;
     }
+
     &__task-user {
       width: 100%;
       border-left: none;
     }
+
     &__task-user {
       width: 100%;
       border-left: none;
@@ -469,6 +508,7 @@ p {
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
   padding: 16px 20px;
+
   &__title {
     font-size: 18px;
     font-weight: 400;
@@ -476,12 +516,14 @@ p {
     margin-bottom: 14px;
     margin-top: 0;
   }
+
   &__labels {
     display: flex;
     gap: 5px;
     padding: 0;
     list-style-type: none;
   }
+
   &__label {
     font-size: 14px;
     font-weight: 700;
@@ -493,6 +535,7 @@ p {
     width: fit-content;
     padding: 2px 12px;
   }
+
   &__bottom {
     font-size: 14px;
     font-weight: 300;
@@ -501,6 +544,7 @@ p {
     gap: 10px;
     margin-top: 16px;
   }
+
   &__input {
     max-width: 100%;
     padding: 9px 5px;
@@ -535,12 +579,14 @@ p {
   width: 100%;
   max-height: 100vh;
   overflow: auto;
+
   &__header {
     display: flex;
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 8px;
   }
+
   &__created {
     display: flex;
     gap: 4px;
@@ -549,9 +595,11 @@ p {
     margin-bottom: 35px;
     align-items: center;
   }
+
   &__title {
     margin: 0;
   }
+
   &__wrapper {
     display: flex;
     gap: 15px;
@@ -560,16 +608,19 @@ p {
     align-items: center;
     justify-content: space-between;
     min-height: 32px;
-    > *:nth-child(2n) {
+
+    >*:nth-child(2n) {
       max-width: 335px;
       width: 100%;
     }
   }
+
   &__wrap {
     display: flex;
     gap: 8px;
     align-items: center;
   }
+
   &__close {
     cursor: pointer;
     background: $borderColor;
@@ -578,12 +629,14 @@ p {
     border-radius: $borderRadius;
     transition: 0.5s;
   }
+
   &__element {
     flex-grow: 1;
     border-radius: $borderRadius;
     border: 1px solid $gray;
     padding: 6px;
   }
+
   &__user {
     display: flex;
     align-items: center;
@@ -621,10 +674,15 @@ p {
   display: flex;
   justify-content: center;
   transition: 0.3s;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
   &__container {
     max-width: 200px;
     width: 100%;
   }
+
   &__logo {
     display: block;
     margin-left: auto;
@@ -643,9 +701,9 @@ p {
     &__logo {
       margin-top: 90px;
     }
+
     &--hidden {
       transform: translate(-100%, 0);
-      //  width: 0;
       overflow: hidden;
     }
   }
@@ -653,6 +711,7 @@ p {
 
 .menu {
   padding-left: 0;
+
   &__element {
     cursor: pointer;
     font-size: 18px;
@@ -664,6 +723,7 @@ p {
     align-items: center;
     margin-top: 26px;
     position: relative;
+
     &--arrow {
       &::after {
         display: block;
@@ -673,15 +733,18 @@ p {
         transition: 0.2s ease-in-out;
       }
     }
+
     &--open {
       &::after {
         transform: rotate(180deg);
       }
     }
   }
+
   &__link {
     color: $black;
   }
+
   &__submenu {
     max-height: 0px;
     overflow: hidden;
@@ -691,11 +754,14 @@ p {
     margin-left: 10px;
     padding-left: 24px;
     letter-spacing: 0.56px;
+
     &--visible {
       max-height: 400px;
     }
+
     li {
       font-weight: 300;
+
       &:not(&:last-child) {
         margin-bottom: 12px;
       }
@@ -730,11 +796,13 @@ p {
   justify-content: center;
   width: 100%;
 }
+
 @media only screen and (max-width: 992px) {
   .main {
     padding-top: 35px;
   }
 }
+
 .container {
   max-width: 1390px;
   width: 100%;
@@ -749,6 +817,7 @@ p {
     font-size: 18px;
     margin-bottom: 4px;
   }
+
   &__list {
     list-style-type: none;
     padding-left: 0;
@@ -769,6 +838,7 @@ p {
       border: 3px solid #ffffff;
     }
   }
+
   &__form {
     display: flex;
     gap: 10px;
@@ -776,6 +846,7 @@ p {
     align-items: flex-start;
     margin-top: 14px;
   }
+
   &__textarea {
     font-family: $primaryFont;
     min-width: 100%;
@@ -785,6 +856,7 @@ p {
     border: 1px solid $gray;
     border-radius: $borderRadius;
   }
+
   &__btn {
     padding: 10px 18px;
     border: none;
@@ -800,15 +872,18 @@ p {
 
 .task-comment {
   padding: 10px 0 0;
+
   &__wrapper {
     display: flex;
     gap: 9px;
     align-items: center;
   }
+
   &__date {
     color: $gray;
     font-size: 14px;
   }
+
   &__text {
     margin: 5px 0 10px;
     font-size: 14px;
@@ -819,6 +894,7 @@ p {
   display: flex;
   align-items: center;
   gap: 6px;
+
   &__img {
     width: 22px;
     height: 22px;
@@ -852,6 +928,7 @@ p {
   gap: 30px;
   background-color: $background;
   margin-bottom: 40px;
+
   &__list {
     list-style-type: none;
     padding-left: 14px;
@@ -859,6 +936,7 @@ p {
     gap: 30px;
     margin: 0;
   }
+
   &__view {
     opacity: 0.5;
     cursor: pointer;
@@ -869,10 +947,12 @@ p {
     text-transform: uppercase;
     text-align: center;
     align-self: center;
+
     &--active {
       opacity: 1;
     }
   }
+
   .input-border {
     margin-bottom: 0px;
     margin-top: 0px;
@@ -884,5 +964,65 @@ p {
     flex-direction: column;
     gap: 20px;
     padding: 30px;
+  }
+}
+
+.input {
+  border-radius: $borderRadius;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 9px;
+}
+
+.invitation-table {
+  border-collapse: collapse;
+  text-align: center;
+  overflow: auto;
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+
+  td,
+  th {
+    padding: 15px;
+    border: none;
+  }
+
+}
+
+.settings {
+  text-align: center;
+  padding-bottom: 120px;
+
+  &__section {
+    padding-top: 10px;
+  }
+
+  &__title {
+    margin-top: 10px;
+
+  }
+
+  &__group {
+    padding: 30px;
+    padding-bottom: 20px;
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    background: $background;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__table {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

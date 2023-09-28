@@ -43,10 +43,12 @@ const UserProfileImage = () => {
   };
 
   return (
-    <div>
-      <h3>File Upload</h3>
+    <div className="settings__group">
+      <h3 className="settings__title">File Upload</h3>
       <input type="file" onChange={handleFileSelect} />
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleUpload} className="small-btn small-btn--center">
+        Upload
+      </button>
       {successMessage && <p className="success">{successMessage}</p>}
       {error && <p className="error">{error}</p>}
     </div>

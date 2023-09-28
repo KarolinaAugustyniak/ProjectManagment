@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
-import CloseIcon from "../assets/img/close.svg";
+import CloseButton from "./CloseButton";
 
 interface DeadlineProps {
   task: Task;
@@ -15,7 +15,9 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
   // Format the date as "YYYY-MM-DD"
   const originalDate = new Date(task.dueDate || "");
   const formattedDate = task.dueDate
-    ? `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1).toString().padStart(2, "0")}-${originalDate
+    ? `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${originalDate
         .getDate()
         .toString()
         .padStart(2, "0")}`
@@ -69,11 +71,7 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
           onChange={handleDueDateChange}
           onBlur={handleUpdateDueDate}
         />
-        {dueDate !== "" && (
-          <button onClick={() => setDueDate("")} className="task-details__close">
-            <img src={CloseIcon} alt="close" />
-          </button>
-        )}
+        {dueDate !== "" && <CloseButton onClick={() => setDueDate("")} />}
       </div>
     </div>
   );
