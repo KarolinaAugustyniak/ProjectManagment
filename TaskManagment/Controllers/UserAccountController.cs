@@ -70,9 +70,49 @@ namespace TaskManagment.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
           }
         }
-   
 
 
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDto userUpdateDto)
+        {
+            try
+            {
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var user = await _context.Users.FindAsync(userId);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Update username if provided
+                if (!string.IsNullOrWhiteSpace(userUpdateDto.Username))
+                {
+                    user.Username = userUpdateDto.Username;
+                }
+
+                // Update password if provided
+                if (!string.IsNullOrWhiteSpace(userUpdateDto.Password))
+                {
+                    // Hash and store the new password securely here
+                    user.Password = userUpdateDto.Password;
+                }
+
+                // Update position if provided
+                if (!string.IsNullOrWhiteSpace(userUpdateDto.Position))
+                {
+                    user.Position = userUpdateDto.Position;
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok("User updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
 
 
     }
