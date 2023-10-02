@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Invitation from "../interfaces/Invitation";
 
@@ -31,9 +31,7 @@ const GenerateInvitationCode: React.FC = ({ setInvitationCodes }) => {
 
   const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const days = parseInt(e.target.value);
-    if (!isNaN(days)) {
-      setExpirationDays(days);
-    }
+    setExpirationDays(days);
   };
 
   return (
@@ -47,6 +45,7 @@ const GenerateInvitationCode: React.FC = ({ setInvitationCodes }) => {
           value={expirationDays}
           onChange={handleExpirationChange}
           className="input"
+          min="1"
         />
       </div>
       <button
@@ -55,7 +54,7 @@ const GenerateInvitationCode: React.FC = ({ setInvitationCodes }) => {
       >
         Generate Code
       </button>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error center">{error}</p>}
     </div>
   );
 };

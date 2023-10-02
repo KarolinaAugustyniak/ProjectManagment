@@ -100,8 +100,8 @@ const UserAccountSettings: React.FC = () => {
         <button type="submit" className="small-btn small-btn--center">
           Update
         </button>
-        {error && <p className="error">{error}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
+        {error && <p className="error center">{error}</p>}
+        {successMessage && <p className="success center">{successMessage}</p>}
       </form>
     </div>
   );

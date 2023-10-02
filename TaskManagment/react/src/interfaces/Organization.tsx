@@ -1,5 +1,5 @@
 import Project from "./Project";
-import UserData from "./User";
+import UserData from "./UserData";
 
 interface Organization {
   organizationId: number;

@@ -49,8 +49,8 @@ const UserProfileImage = () => {
       <button onClick={handleUpload} className="small-btn small-btn--center">
         Upload
       </button>
-      {successMessage && <p className="success">{successMessage}</p>}
-      {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success center">{successMessage}</p>}
+      {error && <p className="error center">{error}</p>}
     </div>
   );
 };

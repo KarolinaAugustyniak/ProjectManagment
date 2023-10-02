@@ -1,4 +1,4 @@
-interface User {
+interface UserData {
   userId: number;
   username: string;
   email: string;
@@ -8,4 +8,4 @@ interface User {
   organizationId: number;
 }
 
-export default User;
+export default UserData;

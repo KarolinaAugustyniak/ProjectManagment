@@ -1,15 +1,9 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-
-type TasksState = {
-  "To do": any[];
-  "In Progress": any[];
-  Testing: any[];
-  Completed: any[];
-};
+import { createContext, useContext, useState, ReactNode } from "react";
+import TasksData from "../interfaces/TasksData";
 
 type TaskContextType = {
-  tasks: TasksState;
-  setTasks: React.Dispatch<React.SetStateAction<TasksState>>;
+  tasks: TasksData;
+  setTasks: React.Dispatch<React.SetStateAction<TasksData>>;
 };
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -20,7 +14,7 @@ interface TaskProviderProps {
 }
 
 export function TaskProvider({ children }: TaskProviderProps) {
-  const [tasks, setTasks] = useState<TasksState>({
+  const [tasks, setTasks] = useState<TasksData>({
     "To do": [],
     "In Progress": [],
     Testing: [],

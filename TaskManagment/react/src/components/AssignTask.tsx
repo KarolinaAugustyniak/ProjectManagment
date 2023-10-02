@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import User from "./User";
-import UserData from "../interfaces/User";
+import UserData from "../interfaces/UserData";
 import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
 import CloseButton from "./CloseButton";
+import TasksData from "../interfaces/TasksData";
 
 interface AssignTaskProps {
   assignedToUser?: UserData;
   task: Task;
 }
 
-const AssignTask: React.FC<AssignTaskProps> = (props) => {
+const AssignTask = (props: AssignTaskProps) => {
   const { assignedToUser, task } = props;
   const token = localStorage.getItem("token");
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<UserData[]>([]);
   const { tasks, setTasks } = useTaskContext();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
     fetchUsers();
   }, []);
 
-  const handleAssignUser = async (assignedUserId) => {
+  const handleAssignUser = async (assignedUserId: number | null) => {
     const assignedUser = users.find((user) => user.userId === assignedUserId);
 
     try {
@@ -55,13 +56,23 @@ const AssignTask: React.FC<AssignTaskProps> = (props) => {
       );
 
       // Update the tasks list in the context
-      const updatedTasks = { ...tasks };
+      const updatedTasks: TasksData = { ...tasks };
       const statusMap = ["To do", "In Progress", "Testing", "Completed"];
       const statusString = statusMap[task.status];
 
-      updatedTasks[statusString] = updatedTasks[statusString].map((t) =>
+      interface UpdatedTasksData {
+        [key: string]: Task[];
+      }
+
+      const updatedTasksData: UpdatedTasksData = { ...updatedTasks };
+
+      updatedTasksData[statusString] = updatedTasksData[statusString].map((t) =>
         t.taskId === task.taskId
-          ? { ...t, assignedTo: assignedUserId, assignedToUser: assignedUser }
+          ? {
+              ...t,
+              assignedTo: assignedUserId,
+              assignedToUser: assignedUser as UserData,
+            }
           : t
       );
 

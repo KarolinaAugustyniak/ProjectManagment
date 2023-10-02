@@ -1,6 +1,6 @@
 import Project from "./Project";
 import TaskComment from "./TaskComment";
-import UserData from "./User";
+import UserData from "./UserData";
 
 interface Task {
   taskId: number;

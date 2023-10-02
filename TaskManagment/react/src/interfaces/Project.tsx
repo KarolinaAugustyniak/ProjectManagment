@@ -1,6 +1,6 @@
 import Organization from "./Organization";
 import Task from "./Task";
-import UserData from "./User";
+import UserData from "./UserData";
 
 interface Project {
   projectId: number;

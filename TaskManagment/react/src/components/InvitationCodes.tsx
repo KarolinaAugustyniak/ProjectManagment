@@ -43,7 +43,7 @@ const InvitationCodes: React.FC<InvitationCodesProps> = ({
         invitationCodes={invitationCodes}
         setInvitationCodes={setInvitationCodes}
       />
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error center">{error}</p>}
     </div>
   );
 };

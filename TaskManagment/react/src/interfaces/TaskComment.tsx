@@ -1,5 +1,5 @@
 import Task from "./Task";
-import UserData from "./User";
+import UserData from "./UserData";
 
 interface TaskComment {
   commentId: number;
