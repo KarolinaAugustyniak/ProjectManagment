@@ -6,7 +6,7 @@ interface CloseButtonProps {
 
 const CloseButton = ({ onClick }: CloseButtonProps) => {
   return (
-    <button onClick={onClick} className="task-details__close">
+    <button onClick={onClick} className="close-btn">
       <img src={CloseIcon} alt="close" />
     </button>
   );

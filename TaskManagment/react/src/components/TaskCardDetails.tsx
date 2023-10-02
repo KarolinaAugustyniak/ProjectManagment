@@ -1,4 +1,3 @@
-import User from "./User";
 import TaskComments from "./TaskComments";
 import DeleteTask from "./DeleteTask";
 import AssignTask from "./AssignTask";
@@ -6,6 +5,7 @@ import TaskDescription from "./TaskDescription";
 import Deadline from "./Deadline";
 import Task from "../interfaces/Task";
 import CloseButton from "./CloseButton";
+import CreationData from "./CreationData";
 
 interface TaskCardDetailsProps {
   task: Task;
@@ -15,10 +15,6 @@ interface TaskCardDetailsProps {
 const TaskCardDetails = ({ task, onClose }: TaskCardDetailsProps) => {
   const { taskId, title, assignedToUser, createdByUser } = task;
 
-  //task creation date
-  const creationDate = new Date(task.creationDate);
-  const formattedCreationDate = creationDate.toLocaleDateString();
-
   return (
     <>
       <div className="task-details">
@@ -27,11 +23,10 @@ const TaskCardDetails = ({ task, onClose }: TaskCardDetailsProps) => {
           <CloseButton onClick={onClose} />
         </div>
         <div className="task-details__content">
-          <div className="task-details__created">
-            Created by
-            <User user={createdByUser} />
-            on {formattedCreationDate}
-          </div>
+          <CreationData
+            createdByUser={createdByUser}
+            date={task.creationDate}
+          />
           <AssignTask assignedToUser={assignedToUser} task={task} />
           <TaskDescription task={task} />
           <Deadline task={task} />

@@ -44,7 +44,7 @@ const UserProfileImage = () => {
 
   return (
     <div className="settings__group">
-      <h3 className="settings__title">File Upload</h3>
+      <h3 className="settings__title">Profile image</h3>
       <input type="file" onChange={handleFileSelect} />
       <button onClick={handleUpload} className="small-btn small-btn--center">
         Upload

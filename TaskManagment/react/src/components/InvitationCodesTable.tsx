@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import CloseButton from "./CloseButton";
 
 const InvitationCodesTable: React.FC = ({
   invitationCodes,
@@ -57,9 +58,9 @@ const InvitationCodesTable: React.FC = ({
                   )}
                 </td>
                 <td>
-                  <button onClick={() => onDelete(invitation.invitationCode)}>
-                    Delete
-                  </button>
+                  <CloseButton
+                    onClick={() => onDelete(invitation.invitationCode)}
+                  />
                 </td>
               </tr>
             ))}

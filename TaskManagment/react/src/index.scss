@@ -84,6 +84,15 @@ a {
   }
 }
 
+.close-btn {
+  cursor: pointer;
+  background: $borderColor;
+  padding: 3px 7px;
+  border: none;
+  border-radius: $borderRadius;
+  transition: 0.5s;
+}
+
 p {
   margin: 0;
 }
@@ -114,6 +123,15 @@ p {
   border-radius: $borderRadius;
   display: block;
   width: fit-content;
+}
+
+.creation-data {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  margin-bottom: 35px;
+  align-items: center;
 }
 
 .login {
@@ -593,14 +611,6 @@ p {
     margin-bottom: 8px;
   }
 
-  &__created {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    font-size: 14px;
-    margin-bottom: 35px;
-    align-items: center;
-  }
 
   &__title {
     margin: 0;
@@ -627,14 +637,6 @@ p {
     align-items: center;
   }
 
-  &__close {
-    cursor: pointer;
-    background: $borderColor;
-    padding: 3px 7px;
-    border: none;
-    border-radius: $borderRadius;
-    transition: 0.5s;
-  }
 
   &__element {
     flex-grow: 1;
