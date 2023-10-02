@@ -72,5 +72,20 @@ namespace TaskManagment.Controllers
             return Ok(projects);
         }
 
+        [HttpGet("getProjectData/{id}")]
+        public async Task<IActionResult> GetProjectsData([FromRoute] int id)
+        {
+            var project = await _context.Projects
+                .Include(u =>u.User)
+                .FirstOrDefaultAsync(p => p.ProjectId == id);
+
+            if(project == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(project);
+        }
+
     }
 }
