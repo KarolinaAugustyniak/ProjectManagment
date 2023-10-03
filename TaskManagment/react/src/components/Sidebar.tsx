@@ -3,6 +3,7 @@ import Logo from "../assets/img/logo.png";
 import Menu from "./Menu";
 import MenuIcon from "../assets/img/menu.svg";
 import LogoutButton from "./LogoutButton";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [menuOpen, isMenuOpen] = useState(false);
@@ -17,7 +18,9 @@ export default function Sidebar() {
       </button>
       <div className={`sidebar ${!menuOpen && "sidebar--hidden"}`}>
         <div className="sidebar__container">
-          <img src={Logo} className="sidebar__logo" />
+          <Link to="/dashboard">
+            <img src={Logo} className="sidebar__logo" />
+          </Link>
           <Menu />
           <LogoutButton />
         </div>

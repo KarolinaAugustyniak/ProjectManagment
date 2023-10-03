@@ -2,19 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TaskCard from "./TaskCard";
 import TaskCardDetails from "./TaskCardDetails";
+import { Link } from "react-router-dom";
 
 const UpcomingTasks = () => {
   const [upcomingTasks, setUpcomingTasks] = useState([]);
   const token = localStorage.getItem("token");
-  const [areDetailsOpen, setAreDetailsOpen] = useState(false);
-
-  const openDetails = () => {
-    setAreDetailsOpen(true);
-  };
-
-  const closeDetails = () => {
-    setAreDetailsOpen(false);
-  };
 
   useEffect(() => {
     const fetchUpcomingTasks = async () => {
@@ -39,17 +31,16 @@ const UpcomingTasks = () => {
 
   return (
     <div className="tasks-box">
-      <h2 className="tasks-box__title">Upcoming Tasks</h2>
+      <h2 className="title">Upcoming Tasks</h2>
       {upcomingTasks.length == 0 ? (
         <p>You don't have upcoming tasks</p>
       ) : (
         <ul className="tasks-box__list">
           {upcomingTasks.map((task, index) => (
             <li key={index}>
-              <TaskCard task={task} onClick={openDetails} />
-              {areDetailsOpen && (
-                <TaskCardDetails task={task} onClose={closeDetails} />
-              )}
+              <Link to={`/project/${task.projectId}`}>
+                <TaskCard task={task} />
+              </Link>
             </li>
           ))}
         </ul>

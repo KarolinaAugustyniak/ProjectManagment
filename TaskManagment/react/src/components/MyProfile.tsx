@@ -37,7 +37,7 @@ export default function MyProfile() {
   return (
     <div className="my-profile">
       <div className="my-profile__top">
-        <h2 className="my-profile__title">My profile</h2>
+        <h2 className="title">My profile</h2>
         <Link to="/settings">
           <img src={Settings} />
         </Link>

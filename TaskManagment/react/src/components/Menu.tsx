@@ -1,38 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Projects from "../assets/img/projects.svg";
 import Tasks from "../assets/img/tasks.svg";
 import Settings from "../assets/img/settings.svg";
-
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { useProjects } from "../context/ProjectsContext";
 
 export default function Menu() {
-  const [projects, setProjects] = useState([]);
+  const { projects } = useProjects();
   const [isProjectsSubMenuOpen, setProjectsSubMenuOpen] = useState(false);
-  const token = localStorage.getItem("token");
 
   const toggleProjectsSubMenu = () => {
     setProjectsSubMenuOpen(!isProjectsSubMenuOpen);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://localhost:7261/api/Projects/get",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setProjects(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
 
   return (
     <ul className="menu">
