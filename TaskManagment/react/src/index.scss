@@ -97,6 +97,13 @@ p {
   margin: 0;
 }
 
+.not-found {
+  text-align: center;
+  font-size: 30px;
+  padding: 15px;
+  padding-top: 10vw;
+}
+
 .error {
   color: $red;
   text-align: center;
@@ -719,17 +726,15 @@ p {
 
 .menu {
   padding-left: 0;
+  list-style-type: none;
 
   &__element {
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.72px;
-    display: flex;
-    gap: 12px;
-    margin-bottom: 14px;
     align-items: center;
-    margin-top: 26px;
+    margin: 32px 0;
     position: relative;
 
     &--arrow {
@@ -738,11 +743,18 @@ p {
         content: url(assets/img/arrow.svg);
         position: absolute;
         right: 0;
+        top: 0;
         transition: 0.2s ease-in-out;
       }
     }
 
     &--open {
+      margin-bottom: 14px;
+
+      .menu__submenu {
+        margin-top: 16px;
+      }
+
       &::after {
         transform: rotate(180deg);
       }
@@ -751,6 +763,8 @@ p {
 
   &__link {
     color: $black;
+    display: flex;
+    gap: 12px;
   }
 
   &__submenu {
@@ -1033,4 +1047,24 @@ p {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.tasks-box {
+  background-color: $background;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  padding: 20px;
+  width: 50%;
+  max-width: 400px;
+
+  &__list {
+    padding: 0;
+    list-style-type: none;
+  }
+}
+
+.dashboard {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }

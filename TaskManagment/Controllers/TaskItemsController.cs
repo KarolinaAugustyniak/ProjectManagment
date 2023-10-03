@@ -67,6 +67,8 @@ namespace TaskManagment.Controllers
 
             var upcomingTaskItems = await _context.TaskItems
                 .Where(t => t.AssignedTo == userId && t.DueDate.HasValue && t.DueDate > currentDate)
+                .Include(x => x.AssignedToUser)
+                .Include(x => x.CreatedByUser)
                 .OrderBy(t => t.DueDate)
                 .ToListAsync();
 
@@ -87,6 +89,8 @@ namespace TaskManagment.Controllers
 
             var outdatedTaskItems = await _context.TaskItems
                 .Where(t => t.AssignedTo == userId && t.DueDate.HasValue && t.DueDate < currentDate)
+                .Include(x => x.AssignedToUser)
+                .Include(x => x.CreatedByUser)
                 .OrderBy(t => t.DueDate)
                 .ToListAsync();
 

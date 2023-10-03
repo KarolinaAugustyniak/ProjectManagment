@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import TaskCard from "./TaskCard";
+import TaskCard from "./TaskCardDragabble";
 import Plus from "../assets/img/plus.svg";
 import axios from "axios";
 import useOutsideClick from "../hooks/useOutsideClick";

@@ -46,8 +46,7 @@ const AssignTask = (props: AssignTaskProps) => {
       await axios.put(
         `https://localhost:7261/api/TaskItems/${task.taskId}`,
         {
-          title: task.title,
-          status: task.status,
+          ...task,
           assignedTo: assignedUserId,
         },
         {

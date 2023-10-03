@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
@@ -35,8 +35,7 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
       await axios.put(
         `https://localhost:7261/api/TaskItems/${task.taskId}`,
         {
-          title: task.title,
-          status: task.status,
+          ...task,
           dueDate: dueDate || null,
         },
         {
