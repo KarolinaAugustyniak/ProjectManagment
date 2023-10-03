@@ -3,8 +3,8 @@ import axios from "axios";
 import TaskCard from "./TaskCard";
 import TaskCardDetails from "./TaskCardDetails";
 
-const UpcomingTasks = () => {
-  const [upcomingTasks, setUpcomingTasks] = useState([]);
+const OutdatedTasks = () => {
+  const [outdatedTasks, setOutdatedTasks] = useState([]);
   const token = localStorage.getItem("token");
   const [areDetailsOpen, setAreDetailsOpen] = useState(false);
 
@@ -20,7 +20,7 @@ const UpcomingTasks = () => {
     const fetchUpcomingTasks = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7261/api/taskitems/upcoming",
+          "https://localhost:7261/api/taskitems/outdated",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ const UpcomingTasks = () => {
           }
         );
 
-        setUpcomingTasks(response.data);
+        setOutdatedTasks(response.data);
       } catch (error) {
         console.error("Error fetching upcoming tasks:", error);
       }
@@ -39,12 +39,12 @@ const UpcomingTasks = () => {
 
   return (
     <div className="tasks-box">
-      <h2>Upcoming Tasks</h2>
-      {upcomingTasks.length == 0 ? (
-        <p>You don't have upcoming tasks</p>
+      <h2>Outdated Tasks</h2>
+      {outdatedTasks.length == 0 ? (
+        <p>You don't have outdated tasks</p>
       ) : (
         <ul className="tasks-box__list">
-          {upcomingTasks.map((task, index) => (
+          {outdatedTasks.map((task, index) => (
             <li key={index}>
               <TaskCard task={task} onClick={openDetails} />
               {areDetailsOpen && (
@@ -58,4 +58,4 @@ const UpcomingTasks = () => {
   );
 };
 
-export default UpcomingTasks;
+export default OutdatedTasks;
