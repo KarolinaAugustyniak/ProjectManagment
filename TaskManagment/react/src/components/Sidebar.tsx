@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Logo from "../assets/img/logo.png";
 import Menu from "./Menu";
 import MenuIcon from "../assets/img/menu.svg";
+import LogoutButton from "./LogoutButton";
 
 export default function Sidebar() {
   const [menuOpen, isMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function Sidebar() {
         <div className="sidebar__container">
           <img src={Logo} className="sidebar__logo" />
           <Menu />
+          <LogoutButton />
         </div>
       </div>
       {menuOpen && <div className="popup-overlay" onClick={handleClick}></div>}
