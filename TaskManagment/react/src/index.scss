@@ -38,6 +38,15 @@ a {
   font-weight: 700;
   letter-spacing: 0.84px;
   color: $black;
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.84px;
+  color: $black;
+  margin: 0;
 }
 
 .btn {
@@ -510,15 +519,12 @@ p {
       width: 100%;
     }
 
-    &__task-user {
+    &__task-user,
+    &__task-date {
       width: 100%;
       border-left: none;
     }
 
-    &__task-user {
-      width: 100%;
-      border-left: none;
-    }
   }
 }
 
@@ -539,6 +545,7 @@ p {
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
   padding: 16px 20px;
+  color: $black;
 
   &__title {
     font-size: 18px;
@@ -743,6 +750,8 @@ p {
 .menu {
   padding-left: 0;
   list-style-type: none;
+  height: 70%;
+  margin-top: 7vw;
 
   &__element {
     cursor: pointer;
@@ -1028,7 +1037,17 @@ p {
     padding: 15px;
     border: none;
   }
+}
 
+@media only screen and (max-width: 450px) {
+  .invitation-table {
+
+    td,
+    th {
+      padding: 6px;
+    }
+
+  }
 }
 
 .settings {
@@ -1061,6 +1080,7 @@ p {
     gap: 12px;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   &__table {
@@ -1069,49 +1089,45 @@ p {
   }
 }
 
+@media only screen and (max-width: 450px) {
+  .settings__table {
+    tr {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 15px;
+    }
+  }
+}
+
 .tasks-box {
   background-color: $background;
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
-  width: 50%;
-  max-width: 400px;
+  padding: 20px;
+  flex-grow: 1;
 
   &__list {
-    padding: 5px;
+    padding-left: 0px;
     list-style-type: none;
   }
 
-  &__title {
-    margin: 0;
-    padding: 22px 15px 0px;
-  }
 }
 
-.dashboard {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
 
 .my-profile {
   background-color: $background;
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
-  max-width: 320px;
-  width: 100%;
-  padding-bottom: 15px;
+  padding: 20px;
 
   &__top {
     display: flex;
     gap: 15px;
     justify-content: space-between;
-    padding: 15px;
     align-items: center;
+    margin-bottom: 10px;
 
-  }
-
-  &__title {
-    margin: 0;
   }
 
   &__bottom {
@@ -1135,5 +1151,131 @@ p {
 
   &__position {
     margin-bottom: 4px;
+  }
+}
+
+.dashboard {
+  margin-top: 4vw;
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__date {
+    margin-bottom: 40px;
+    color: $gray;
+    font-weight: 500;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  &__right {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    width: calc(33% - 7px);
+  }
+
+  &__left {
+    display: flex;
+    gap: 15px;
+    width: calc(66% - 7px);
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .dashboard {
+    &__wrapper {
+      flex-direction: column;
+    }
+
+    &__right {
+      width: 100%;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    &__left {
+      width: 100%;
+    }
+  }
+
+  .my-profile,
+  .tasks-box {
+    width: calc(50% - 7px);
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .dashboard {
+
+    &__heading,
+    &__title,
+    &__date {
+      text-align: center;
+    }
+
+    &__wrapper {
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__right {
+      flex-direction: column;
+    }
+
+    &__left {
+      flex-direction: column;
+    }
+  }
+
+  .my-profile,
+  .tasks-box {
+    width: 100%
+  }
+}
+
+.projects {
+  background-color: $background;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  padding: 20px;
+
+  &__project {
+    padding: 11px 32px;
+    background-color: #5792c3;
+    color: $white;
+    border-radius: $borderRadius;
+    letter-spacing: 0.9px;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    margin-bottom: 28px;
+  }
+
+  &__new {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .projects {
+
+    &__wrapper,
+    &__new {
+      justify-content: center;
+    }
   }
 }
