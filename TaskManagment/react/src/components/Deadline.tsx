@@ -3,6 +3,7 @@ import axios from "axios";
 import Task from "../interfaces/Task";
 import { useTaskContext } from "../context/TaskContext";
 import CloseButton from "./CloseButton";
+import TasksData from "../interfaces/TasksData";
 
 interface DeadlineProps {
   task: Task;
@@ -46,11 +47,13 @@ const Deadline: React.FC<DeadlineProps> = ({ task }) => {
       );
 
       // Update the tasks list in the context
-      const updatedTasks = { ...tasks };
+      const updatedTasks: TasksData = { ...tasks };
       const statusMap = ["To do", "In Progress", "Testing", "Completed"];
       const statusString = statusMap[task.status];
 
-      updatedTasks[statusString] = updatedTasks[statusString].map((t) =>
+      updatedTasks[statusString as keyof TasksData] = updatedTasks[
+        statusString as keyof TasksData
+      ].map((t) =>
         t.taskId === task.taskId ? { ...t, dueDate: dueDate || null } : t
       );
 

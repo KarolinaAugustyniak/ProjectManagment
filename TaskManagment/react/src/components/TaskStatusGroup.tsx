@@ -7,11 +7,7 @@ import useOutsideClick from "../hooks/useOutsideClick";
 import { useParams } from "react-router-dom";
 import { useTaskContext } from "../context/TaskContext";
 import TaskListElement from "./TaskListElement";
-
-interface Task {
-  id: number;
-  title: string;
-}
+import Task from "../interfaces/Task";
 
 interface TaskStatusGroupProps {
   title: string;
@@ -21,7 +17,13 @@ interface TaskStatusGroupProps {
   currentView: string;
 }
 
-const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tasksForColumn, currentView }) => {
+const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({
+  title,
+  index,
+  id,
+  tasksForColumn,
+  currentView,
+}) => {
   const { projectId } = useParams();
   const [newTask, setNewTask] = useState({
     Title: "",
@@ -32,7 +34,7 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tas
   const newTaskItem = useRef(null);
   const newTaskInputRef = useRef<HTMLInputElement>(null);
   const token = localStorage.getItem("token");
-  const { tasks, setTasks } = useTaskContext();
+  const { setTasks } = useTaskContext();
 
   const handleClick = () => {
     setAddNewTask(true);
@@ -59,11 +61,15 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tas
       setAddNewTask(false);
       setNewTask({ ...newTask, Title: "" });
       try {
-        const response = await axios.post("https://localhost:7261/api/TaskItems", newTask, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.post(
+          "https://localhost:7261/api/TaskItems",
+          newTask,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setTasks((prevTasks) => ({
           ...prevTasks,
           [title]: [...prevTasks[title], response.data],
@@ -88,7 +94,11 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tas
           <h2 className="kanban__title">{title}</h2>
           <Droppable droppableId={id}>
             {(provided) => (
-              <ul ref={provided.innerRef} {...provided.droppableProps} className="kanban__list">
+              <ul
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="kanban__list"
+              >
                 {(tasksForColumn as Task[]).map((task, index) => (
                   <TaskCard key={task.taskId} task={task} index={index} />
                 ))}
@@ -117,9 +127,17 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({ title, index, id, tas
           <h2 className="list__title">{title}</h2>
           <Droppable droppableId={id}>
             {(provided) => (
-              <ul ref={provided.innerRef} {...provided.droppableProps} className="list__ul">
+              <ul
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="list__ul"
+              >
                 {(tasksForColumn as Task[]).map((task, index) => (
-                  <TaskListElement key={task.taskId} task={task} index={index} />
+                  <TaskListElement
+                    key={task.taskId}
+                    task={task}
+                    index={index}
+                  />
                 ))}
                 {addNewTask && (
                   <li className="list__element" ref={newTaskItem}>

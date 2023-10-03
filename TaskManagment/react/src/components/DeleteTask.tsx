@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useTaskContext } from "../context/TaskContext";
+import TasksData from "../interfaces/TasksData";
 
 interface DeleteTaskProps {
   taskId: number;
@@ -20,10 +21,12 @@ const DeleteTask: React.FC<DeleteTaskProps> = ({ taskId }) => {
       });
 
       //update tasks list
-      const updatedTasks = { ...tasks };
+      const updatedTasks: TasksData = { ...tasks };
 
       for (const column in updatedTasks) {
-        updatedTasks[column] = updatedTasks[column].filter((task) => task.taskId !== taskId);
+        updatedTasks[column as keyof TasksData] = updatedTasks[
+          column as keyof TasksData
+        ].filter((task) => task.taskId !== taskId);
       }
 
       setTasks(updatedTasks);

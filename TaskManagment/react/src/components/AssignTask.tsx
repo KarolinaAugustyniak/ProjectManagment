@@ -38,7 +38,9 @@ const AssignTask = (props: AssignTaskProps) => {
   }, []);
 
   const handleAssignUser = async (assignedUserId: number | null) => {
-    const assignedUser = users.find((user) => user.userId === assignedUserId);
+    const assignedUser = assignedUserId
+      ? users.find((user) => user.userId === assignedUserId)
+      : null;
 
     try {
       await axios.put(
@@ -60,18 +62,14 @@ const AssignTask = (props: AssignTaskProps) => {
       const statusMap = ["To do", "In Progress", "Testing", "Completed"];
       const statusString = statusMap[task.status];
 
-      interface UpdatedTasksData {
-        [key: string]: Task[];
-      }
-
-      const updatedTasksData: UpdatedTasksData = { ...updatedTasks };
-
-      updatedTasksData[statusString] = updatedTasksData[statusString].map((t) =>
+      updatedTasks[statusString as keyof TasksData] = updatedTasks[
+        statusString as keyof TasksData
+      ].map((t) =>
         t.taskId === task.taskId
           ? {
               ...t,
               assignedTo: assignedUserId,
-              assignedToUser: assignedUser as UserData,
+              assignedToUser: assignedUser as UserData | null,
             }
           : t
       );
