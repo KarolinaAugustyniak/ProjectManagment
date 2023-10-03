@@ -114,6 +114,20 @@ namespace TaskManagment.Controllers
             }
         }
 
+        [HttpGet("get")]
+        public async Task<IActionResult> GetUser()
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+            return Ok(user);
+
+        }
+
 
     }
 }

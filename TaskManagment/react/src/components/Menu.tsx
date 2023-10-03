@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Projects from "../assets/img/projects.svg";
 import Tasks from "../assets/img/tasks.svg";
 import Settings from "../assets/img/settings.svg";

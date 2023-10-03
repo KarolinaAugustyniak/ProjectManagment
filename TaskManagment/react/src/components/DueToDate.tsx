@@ -1,8 +1,7 @@
-import React from 'react'
 import Calendar from "../assets/img/calendar.svg";
 
 interface DueToDateProps {
-  date?: string; 
+  date?: string;
 }
 
 export default function DueToDate({ date }: DueToDateProps) {
@@ -12,14 +11,14 @@ export default function DueToDate({ date }: DueToDateProps) {
     const formattedDate = dueDate.toLocaleDateString();
 
     return (
-      <div className='due-to-date'>
+      <div className="due-to-date">
         <img src={Calendar} alt="Calendar Icon" />
         <p>Due to {formattedDate}</p>
       </div>
     );
   } else {
     return (
-      <div className='due-to-date'>
+      <div className="due-to-date">
         <img src={Calendar} alt="Calendar Icon" />
         <p>Deadline not set</p>
       </div>

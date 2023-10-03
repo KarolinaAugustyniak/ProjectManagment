@@ -19,7 +19,7 @@ const UserAccountSettings: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.username || !formData.password || !formData.position) {
+    if (!formData.username && !formData.password && !formData.position) {
       setError("Please fill out at least one field.");
       return;
     }

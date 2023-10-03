@@ -39,7 +39,7 @@ const OutdatedTasks = () => {
 
   return (
     <div className="tasks-box">
-      <h2>Outdated Tasks</h2>
+      <h2 className="tasks-box__title">Outdated Tasks</h2>
       {outdatedTasks.length == 0 ? (
         <p>You don't have outdated tasks</p>
       ) : (

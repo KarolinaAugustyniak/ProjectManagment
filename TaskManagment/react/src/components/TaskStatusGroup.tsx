@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import TaskCard from "./TaskCardDragabble";
+import TaskCardDragabble from "./TaskCardDragabble";
 import Plus from "../assets/img/plus.svg";
 import axios from "axios";
 import useOutsideClick from "../hooks/useOutsideClick";
@@ -100,7 +100,11 @@ const TaskStatusGroup: React.FC<TaskStatusGroupProps> = ({
                 className="kanban__list"
               >
                 {(tasksForColumn as Task[]).map((task, index) => (
-                  <TaskCard key={task.taskId} task={task} index={index} />
+                  <TaskCardDragabble
+                    key={task.taskId}
+                    task={task}
+                    index={index}
+                  />
                 ))}
                 {addNewTask && (
                   <li className="task-card" ref={newTaskItem}>

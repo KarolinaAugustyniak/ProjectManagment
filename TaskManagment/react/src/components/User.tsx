@@ -10,7 +10,7 @@ export default function User({ user }: UserProps) {
     : null;
 
   return (
-    <div className="user">
+    <div className="user" title={user.position}>
       {imagePath && <img src={imagePath} className="user__img" />}
       <p>{user.username}</p>
     </div>

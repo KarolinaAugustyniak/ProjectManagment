@@ -39,7 +39,7 @@ const UpcomingTasks = () => {
 
   return (
     <div className="tasks-box">
-      <h2>Upcoming Tasks</h2>
+      <h2 className="tasks-box__title">Upcoming Tasks</h2>
       {upcomingTasks.length == 0 ? (
         <p>You don't have upcoming tasks</p>
       ) : (

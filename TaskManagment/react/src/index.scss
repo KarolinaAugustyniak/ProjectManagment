@@ -696,6 +696,9 @@ p {
   &__container {
     max-width: 200px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   &__logo {
@@ -703,7 +706,20 @@ p {
     margin-left: auto;
     margin-right: auto;
     margin-top: 4vw;
-    margin-bottom: 10vw;
+  }
+
+  &__logout {
+    margin-top: 7vw;
+    margin-bottom: 30px;
+    font-size: 18px;
+    letter-spacing: 0.72px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-family: $primaryFont;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 }
 
@@ -923,6 +939,10 @@ p {
     border-radius: 50%;
     object-fit: cover;
   }
+
+  &__position {
+    font-size: 12px;
+  }
 }
 
 .delete-task {
@@ -1053,13 +1073,17 @@ p {
   background-color: $background;
   border: 1px solid $borderColor;
   border-radius: $borderRadius;
-  padding: 20px;
   width: 50%;
   max-width: 400px;
 
   &__list {
-    padding: 0;
+    padding: 5px;
     list-style-type: none;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 22px 15px 0px;
   }
 }
 
@@ -1067,4 +1091,49 @@ p {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+}
+
+.my-profile {
+  background-color: $background;
+  border: 1px solid $borderColor;
+  border-radius: $borderRadius;
+  max-width: 320px;
+  width: 100%;
+  padding-bottom: 15px;
+
+  &__top {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__bottom {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    align-items: center;
+  }
+
+  &__img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+
+  &__username {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  &__position {
+    margin-bottom: 4px;
+  }
 }

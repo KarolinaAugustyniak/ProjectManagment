@@ -95,7 +95,7 @@ const AssignTask = (props: AssignTaskProps) => {
           <option value="">Select a user</option>
           {users.map((user) => (
             <option key={user.userId} value={user.userId}>
-              {user.username}
+              {user.username}, {user.position}
             </option>
           ))}
         </select>
