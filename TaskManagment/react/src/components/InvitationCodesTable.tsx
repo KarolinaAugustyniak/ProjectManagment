@@ -38,7 +38,7 @@ const InvitationCodesTable: React.FC = ({
 
   return (
     <>
-      {invitationCodes ? (
+      {invitationCodes.length != 0 ? (
         <table className="invitation-table">
           <thead>
             <tr>

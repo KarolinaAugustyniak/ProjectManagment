@@ -35,7 +35,7 @@ export default function Menu() {
             isProjectsSubMenuOpen ? "menu__submenu--visible" : ""
           }`}
         >
-          {projects ? (
+          {projects.length != 0 ? (
             projects.map((project) => (
               <li key={project.projectId}>
                 <Link

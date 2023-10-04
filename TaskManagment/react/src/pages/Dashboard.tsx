@@ -2,6 +2,7 @@ import MyProfile from "../components/MyProfile";
 import OutdatedTasks from "../components/OutdatedTasks";
 import Projects from "../components/Projects";
 import UpcomingTasks from "../components/UpcomingTasks";
+import { useUser } from "../context/UserContext";
 import Layout from "../layouts/Layout";
 
 export default function Dashboard() {
@@ -13,12 +14,13 @@ export default function Dashboard() {
     day: "numeric",
   };
   const formattedDate = currentDate.toLocaleDateString("en-US", options);
+  const { user } = useUser();
 
   return (
     <Layout>
       <h1 className="main-title dashboard__heading">Dashboard</h1>
       <div className="dashboard">
-        <h2 className="dashboard__title">Hello,</h2>
+        <h2 className="dashboard__title">Hello {user?.username},</h2>
         <p className="dashboard__date">Today is {formattedDate}</p>
         <div className="dashboard__wrapper">
           <div className="dashboard__left">

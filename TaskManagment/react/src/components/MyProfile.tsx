@@ -1,38 +1,21 @@
 import { Link } from "react-router-dom";
 import Settings from "../assets/img/settings.svg";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import UserData from "../interfaces/UserData";
+import { useUser } from "../context/UserContext";
 
 export default function MyProfile() {
-  const [user, setUser] = useState<UserData | null>();
+  const { user } = useUser();
   const [imagePath, setImagePath] = useState("");
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          "https://localhost:7261/api/useraccount/get",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUser(response.data);
-        response.data.profileImageFileName
-          ? setImagePath(
-              `https://localhost:7261/images/${response.data.profileImageFileName}`
-            )
-          : null;
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, []);
+    if (user && user.profileImageFileName) {
+      setImagePath(
+        `https://localhost:7261/images/${user.profileImageFileName}`
+      );
+    } else {
+      setImagePath("");
+    }
+  }, [user]);
 
   return (
     <div className="my-profile">
@@ -44,7 +27,7 @@ export default function MyProfile() {
       </div>
       {user && (
         <div className="my-profile__bottom">
-          <img src={imagePath} className="my-profile__img" />
+          {imagePath && <img src={imagePath} className="my-profile__img" />}
           <div>
             <p className="my-profile__username">{user.username}</p>
             <p className="my-profile__position">{user.position}</p>

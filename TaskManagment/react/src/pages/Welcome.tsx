@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import InputWithLabel from "../components/InputWithLabel";
 import Pen from "../assets/img/pen.svg";
 import Group from "../assets/img/group.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Welcome() {
+  const navigate = useNavigate();
   const [organization, setOrganization] = useState("");
   const [invitationCode, setInvitationCode] = useState("");
   const [error, setError] = useState("");
@@ -32,6 +34,7 @@ export default function Welcome() {
           },
         }
       );
+      navigate("/dashboard");
     } catch (err) {
       setError("Something went wrong. Try again later.");
     }
@@ -40,7 +43,7 @@ export default function Welcome() {
   const handleSubmitJoin = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post(
+      await axios.put(
         `https://localhost:7261/api/Invitation/join/${invitationCode}`,
         {},
         {
@@ -49,8 +52,10 @@ export default function Welcome() {
           },
         }
       );
+      navigate("/dashboard");
     } catch (err) {
-      setJoinError("Something went wrong. Try again later.");
+      console.log(err);
+      setJoinError(err.response.data);
     }
   };
 
@@ -67,6 +72,7 @@ export default function Welcome() {
               label="organization Name"
               img={Pen}
               handleChange={handleChangeCreate}
+              value={organization}
               type="text"
             />
             <button type="submit" className="btn btn--main">
@@ -83,13 +89,14 @@ export default function Welcome() {
               name="invitationCode"
               label="invitation Code"
               img={Group}
+              value={invitationCode}
               handleChange={handleChangeJoin}
               type="text"
             />
             <button type="submit" className="btn btn--main">
               Submit
             </button>
-            {joinError && <p>{joinError}</p>}
+            {joinError && <p className="error">{joinError}</p>}
           </form>
         </div>
       </div>

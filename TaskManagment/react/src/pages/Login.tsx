@@ -34,7 +34,7 @@ export default function Login() {
       );
       const token = response.data;
       localStorage.setItem("token", token);
-      navigate("/welcome");
+      navigate("/dashboard");
     } catch (err) {
       setError("Invalid username or password");
     }

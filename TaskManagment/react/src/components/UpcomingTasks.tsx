@@ -33,7 +33,7 @@ const UpcomingTasks = () => {
     <div className="tasks-box">
       <h2 className="title">Upcoming Tasks</h2>
       {upcomingTasks.length == 0 ? (
-        <p>You don't have upcoming tasks</p>
+        <p className="text">You don't have upcoming tasks</p>
       ) : (
         <ul className="tasks-box__list">
           {upcomingTasks.map((task, index) => (

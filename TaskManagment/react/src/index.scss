@@ -856,6 +856,10 @@ p {
   padding: 0 20px;
 }
 
+.text {
+  margin: 14px 0;
+}
+
 .comments {
   border-top: 1px solid $borderColor;
   margin-top: 30px;
@@ -1133,7 +1137,6 @@ p {
   &__bottom {
     display: flex;
     gap: 15px;
-    padding: 15px;
     align-items: center;
   }
 

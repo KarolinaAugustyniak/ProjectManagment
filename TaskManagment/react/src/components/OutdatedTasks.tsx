@@ -33,7 +33,7 @@ const OutdatedTasks = () => {
     <div className="tasks-box">
       <h2 className="title">Outdated Tasks</h2>
       {outdatedTasks.length == 0 ? (
-        <p>You don't have outdated tasks</p>
+        <p className="text">You don't have outdated tasks</p>
       ) : (
         <ul className="tasks-box__list">
           {outdatedTasks.map((task, index) => (

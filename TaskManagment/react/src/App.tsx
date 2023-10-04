@@ -8,24 +8,27 @@ import Settings from "./pages/Settings";
 import { TaskProvider } from "./context/TaskContext";
 import Dashboard from "./pages/Dashboard";
 import { ProjectsProvider } from "./context/ProjectsContext";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <TaskProvider>
-      <ProjectsProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="welcome" element={<Welcome />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="project/:projectId" element={<Project />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </ProjectsProvider>
-    </TaskProvider>
+    <UserProvider>
+      <TaskProvider>
+        <ProjectsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="welcome" element={<Welcome />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="project/:projectId" element={<Project />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </BrowserRouter>
+        </ProjectsProvider>
+      </TaskProvider>
+    </UserProvider>
   );
 }
 
