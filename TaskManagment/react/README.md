@@ -1,27 +1,52 @@
-# React + TypeScript + Vite
+# Project managment app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+This application was created for learning and improving .NET skills. My main goal was not only to provide an effective project management tool, but also to explore the knowledge and experience of .NET. 
+"Project Management" is a web application designed for efficient project planning and collaboration. The application is designed to facilitate the division of tasks among employees within an organization. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Screenshot_10](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/638ee92b-60bc-4175-9186-2154bb72a4b0)
 
-## Expanding the ESLint configuration
+![Screenshot_1](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7bc7f438-2cb2-4ae1-9f3a-7343c0e33b4a)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![Screenshot_4](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/6b2ae03c-b876-4016-a673-2b01e3919302)
 
-- Configure the top-level `parserOptions` property like this:
+![Screenshot_3](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/325b3e70-5cbd-4d70-ad76-1c6111610d42)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+![Screenshot_2](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/8a248d28-3bd5-43dd-8a7f-5a6a96782d2f)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![Screenshot_5](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/41cc8c08-e665-4da8-b34a-54ff54f70f3d)
+
+
+### Key Features
+
+1. **Kanban Board View**: Visualize tasks on a Kanban board for intuitive task management.
+
+2. **List View for Tasks**: Easily switch to a list view for a different perspective on task organization.
+
+3. **Dashboard Insights**: Get real-time information on overdue and upcoming tasks, user profile, projects, and create new projects effortlessly.
+
+4. **User Settings**: Access a settings page to modify your username, password, and job position.
+
+5. **Profile Customization**: Set a profile image to personalize your account.
+
+6. **Invitation Code Generation**: Generate invitation codes for organizational access and collaboration.
+
+7. **Task Details**: Add comprehensive details to tasks, including description, assigned user, and deadlines.
+
+8. **Task Comments**: Enable team communication by allowing users to add comments directly to tasks
+
+9. **Authentication System**: Securely log in and register with ease.
+
+10. **Organization Management**: Create new organization or join existing ones using invitation codes.
+    
+11. **Dynamic Search**: Instantly locate tasks as you type, providing a dynamic and responsive search experience.
+
+
+### Technologies Used
+
+- ASP.NET MVC
+- Entity framework Core
+- Microsoft SQL Server (MSSQL)
+- React
+- Typescript
