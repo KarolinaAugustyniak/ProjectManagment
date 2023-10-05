@@ -15,7 +15,9 @@ This application was created for learning and improving .NET skills. My main goa
 
 ![Screenshot_2](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/8a248d28-3bd5-43dd-8a7f-5a6a96782d2f)
 
-![Screenshot_5](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/41cc8c08-e665-4da8-b34a-54ff54f70f3d)
+![Screenshot_7](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7fbca0a1-ee7f-45d8-8805-b08d49b74fe5)
+
+![Screenshot_6](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7d806bad-87f5-4c1b-b2e6-f87498ceb6ab)
 
 
 ### Key Features
