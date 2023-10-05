@@ -5,19 +5,19 @@
 This application was created for learning and improving .NET skills. My main goal was not only to provide an effective project management tool, but also to explore the knowledge and experience of .NET. 
 "Project Management" is a web application designed for efficient project planning and collaboration. The application is designed to facilitate the division of tasks among employees within an organization. 
 
-![Screenshot_10](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/638ee92b-60bc-4175-9186-2154bb72a4b0)
+![Screenshot_10](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/97d5bb64-5def-484f-9e5f-f7a09975defb)
 
-![Screenshot_1](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7bc7f438-2cb2-4ae1-9f3a-7343c0e33b4a)
+![Screenshot_1](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/33b877b8-5495-42e2-8b78-2b52cc89aab6)
 
-![Screenshot_4](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/6b2ae03c-b876-4016-a673-2b01e3919302)
+![Screenshot_4](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/8bf8d7ec-5bc3-4076-af46-1bfc4c74d59d)
 
-![Screenshot_3](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/325b3e70-5cbd-4d70-ad76-1c6111610d42)
+![Screenshot_3](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/ae499e1f-8e4f-4440-8b6b-40125519d29f)
 
-![Screenshot_2](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/8a248d28-3bd5-43dd-8a7f-5a6a96782d2f)
+![Screenshot_2](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/a0b80b39-fd1a-4086-a9e6-0c703eb39fb1)
 
-![Screenshot_7](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7fbca0a1-ee7f-45d8-8805-b08d49b74fe5)
+![Screenshot_7](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/f59dec10-ff99-4919-890a-a6e5cc66e66a)
 
-![Screenshot_6](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/7d806bad-87f5-4c1b-b2e6-f87498ceb6ab)
+![Screenshot_6](https://github.com/KarolinaAugustyniak/ProjectManagment/assets/88251386/1120e8a2-e0a0-4752-8f2a-7ceea54e5c08)
 
 
 ### Key Features
