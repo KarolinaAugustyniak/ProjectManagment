@@ -1,5 +1,5 @@
 import LoginImage from "../assets/img/business-growth.png";
-import Logo from "../assets/img/task-managment.svg";
+import Logo from "../assets/img/logo.png";
 
 type ChildrenProps = {
   children: React.ReactNode;

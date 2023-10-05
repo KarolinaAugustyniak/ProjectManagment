@@ -20,6 +20,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="" element={<Dashboard />} />
               <Route path="welcome" element={<Welcome />} />
               <Route path="settings" element={<Settings />} />
               <Route path="project/:projectId" element={<Project />} />
